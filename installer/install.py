@@ -64,6 +64,22 @@ def protect_existing_os():
             raise ValueError('Existing operating-system root preserved. Select an empty root partition or resume a valid Vivian receipt; other OS partitions will not be overwritten.')
 
 
+def initialize_checkout(tree, revision):
+    """Keep the exact upstream commit as parent, without checking out files."""
+    if not re.fullmatch(r'[0-9a-f]{40}', revision):
+        raise ValueError('Installation requires an exact published Git revision.')
+    run(['git', '-C', tree, 'init', '--initial-branch=main'])
+    run(['git', '-C', tree, 'remote', 'add', 'origin', 'https://github.com/Roshrak/Vivian.git'])
+    run(['git', '-C', tree, 'fetch', '--depth=1', 'origin', revision])
+    fetched = run(['git', '-C', tree, 'rev-parse', 'FETCH_HEAD'], True)
+    if fetched != revision:
+        raise ValueError('Fetched Git base differs from the launching revision; no source replacement allowed.')
+    run(['git', '-C', tree, 'update-ref', 'refs/heads/main', revision])
+    run(['git', '-C', tree, 'read-tree', 'HEAD'])
+    if run(['git', '-C', tree, 'diff', '--name-only'], True):
+        raise ValueError('Shared source differs from the exact upstream Git tree; installation stopped.')
+
+
 def ask(prompt, default=None):
     # BufferedRandom (r+) requires seekability, which a real terminal lacks.
     # Separate text readers/writers work on the actual ISO and SSH ptys.
@@ -430,11 +446,10 @@ def prepare_source(source, revision, boot_mode, boot_disk, vm_key=None, checkpoi
             'repository': 'https://github.com/Roshrak/Vivian', 'revision': revision,
             'source_sha256': digest(source)[0], 'hostname': hostname, 'username': username,
             'boot_mode': boot_mode, 'vm_test_only': bool(vm_key), 'created_at': time.time()})
-        run(['git', '-C', tree, 'init', '--initial-branch=main'])
+        initialize_checkout(tree, revision)
         run(['git', '-C', tree, 'add', '--', '.'])
         # This is a brand-new generated checkout; no user index exists to overwrite.
         run(['git', '-C', tree, '-c', 'user.name=Vivian installer', '-c', 'user.email=installer@localhost', 'commit', '-m', 'Install Vivian ' + revision + ' with generated host ' + hostname])
-        run(['git', '-C', tree, 'remote', 'add', 'origin', 'https://github.com/Roshrak/Vivian.git'])
         prepared_hash = digest(tree)[0]
         if checkpoint is not None:
             checkpoint(hostname, username, prepared_hash, tree)

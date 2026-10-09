@@ -11,10 +11,11 @@ Completed evidence includes:
 
 - Full original `tonelico` build, flake validation, and comparison of its
   critical options and original system/Home Manager package names/priorities.
-- Thirty-eight isolated installer safety tests, including real terminal I/O,
+- Forty-one isolated installer safety tests, including real terminal I/O,
   explicit erase confirmation, symlinks, stale/changed source, interrupted
   source preparation, refusal to replace another OS root, failure-safe resume
-  and a bounded retry of the identical evaluation/build after a SIGBUS.
+  a bounded retry of the identical evaluation/build after a SIGBUS, and refusal
+  of a mismatched upstream revision or changed shared source.
 - A complete guided installation from the official ISO; interrupted build
   resumed without reformatting. Kernel/initrd, EFI entry and fallback EFI loader
   were verified on the target disk.

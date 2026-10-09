@@ -79,10 +79,12 @@ starting; it does not restart the compositor. Root rebuilds trust only
 `/etc/nixos` through the generated system Git configuration. Installer Nix caches
 use a private directory on the target disk, with trust scoped to `/mnt/etc/nixos`.
 
-The newly installed repository is a clean local snapshot plus its generated
-host and upstream provenance; it is not a blind checkout that overwrites future
-local host changes. Review upstream updates before integrating them. Native
-rebuilds use the generated hostname alias. Private credentials and personal
+The newly installed repository keeps the exact launching upstream commit as a
+shallow Git parent. Its one local commit adds the generated host and provenance;
+shared files are compared against that parent before staging. Metadata fetching
+never checks out files over the immutable launching source. Review upstream
+updates before integrating them. Native rebuilds use the generated hostname
+alias. Private credentials and personal
 application state remain excluded, even when a public helper refers to their
 expected runtime location. Original laptop-only recovery closures are an external
 machine-local dependency of `tonelico`, not an installer dependency of new hosts.

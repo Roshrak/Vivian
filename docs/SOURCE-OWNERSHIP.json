@@ -245,7 +245,7 @@
       "path": "docs/PORTABILITY.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "8645567364105aca110f01811997d21cdd9a68e39588398751e5bc5a30d1e514"
+      "sha256": "a6b831894eb396fe5215ee4b280f3437ab93ca86a78bda7a3d14f4903ce1e87f"
     },
     {
       "path": "docs/SOURCE-OWNERSHIP.json",
@@ -257,7 +257,7 @@
       "path": "docs/VALIDATION.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "b6075971f0bf2c94f871d194ad8abfca3f518310a5d8063a0e2f81cdda166511"
+      "sha256": "9e9fef40cb44bc17976b8f10bb83f5021d35fa3276aea09ac0b3522c345d2e6f"
     },
     {
       "path": "flake.lock",
@@ -947,7 +947,7 @@
       "path": "installer/install.py",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "6915ebfa857d00596833cecb981b1f43c2ce3cb5e05cb49f95481a88317e0b03"
+      "sha256": "73537a71206bd609207fae29c34f881067713da832f3e7fcb47eb042afdbe75d"
     },
     {
       "path": "lib/desktop-config.nix",
@@ -1229,7 +1229,7 @@
       "path": "tests/test_installer.py",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "5e694d5e87ea39a6a5c5c80d2e2a0f845d23edaabdc9c3ac59664c4a804cee83"
+      "sha256": "f70143f37eb8d2caf7eb2d2a31485ec707801a8d81668e39d422b8e884b23927"
     }
   ],
   "external_inputs": [

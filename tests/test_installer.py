@@ -66,6 +66,28 @@ class InstallerSafety(unittest.TestCase):
             with self.assertRaises(ValueError):installer.run_nix(['nix','store','delete','fixture'])
             commands.assert_not_called()
 
+    def test_checkout_rejects_nonimmutable_revision_before_network_or_changes(self):
+        with patch.object(installer,'run') as commands:
+            with self.assertRaisesRegex(ValueError,'exact published'):installer.initialize_checkout(self.root,'main')
+            commands.assert_not_called()
+
+    def test_checkout_refuses_wrong_fetched_base(self):
+        rev='a'*40
+        def command(args,*unused):
+            return 'b'*40 if 'rev-parse' in args else ''
+        with patch.object(installer,'run',side_effect=command) as commands:
+            with self.assertRaisesRegex(ValueError,'differs'):installer.initialize_checkout(self.root,rev)
+            self.assertFalse(any('update-ref' in c.args[0] for c in commands.call_args_list))
+
+    def test_checkout_refuses_changed_shared_source(self):
+        rev='a'*40
+        def command(args,*unused):
+            if 'rev-parse' in args:return rev
+            if 'diff' in args:return 'flake.lock'
+            return ''
+        with patch.object(installer,'run',side_effect=command):
+            with self.assertRaisesRegex(ValueError,'Shared source differs'):installer.initialize_checkout(self.root,rev)
+
     def test_usb_never_erasable(self):
         d = self.node(); d['tran'] = 'usb'
         self.assertIn('USB', installer.unsafe_device(d))
