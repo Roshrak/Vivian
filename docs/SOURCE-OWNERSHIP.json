@@ -11,7 +11,7 @@
       "path": "README.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "cb464da325a0df8d174d82ba03100b67d3b9fc34aa75eeb4ad8387b125e010b7"
+      "sha256": "51a02f6f88c1b135d4aa85f59e6527cf53770d8c6219e5d3f3a55c882d2d9ab6"
     },
     {
       "path": "archive/claude-code.nix",
@@ -257,7 +257,7 @@
       "path": "docs/VALIDATION.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "9e9fef40cb44bc17976b8f10bb83f5021d35fa3276aea09ac0b3522c345d2e6f"
+      "sha256": "bcb6aa62364b7cd505ae4d06315ec57057a107a3900fcf33f9e100b8b8fef24a"
     },
     {
       "path": "flake.lock",

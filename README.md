@@ -91,6 +91,11 @@ The agent applications and bridge are installed; authenticated operation still
 requires the owner's credentials. The gateway waits for its private configuration.
 See [portability boundaries](docs/PORTABILITY.md) and [validation](docs/VALIDATION.md).
 
+The public command has been tested with actual UEFI and BIOS installations from
+the official graphical ISO, including installed first boot and native rebuilds.
+Niri and Mango were exercised graphically; physical hardware and private
+authenticated integrations remain outside that VM evidence.
+
 ## Configuration layout
 
 ```text
