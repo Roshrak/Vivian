@@ -39,10 +39,12 @@ def run(args, capture=False):
 
 
 def ask(prompt, default=None):
-    with open('/dev/tty', 'r+') as tty:
-        tty.write(prompt + (f' [{default}]' if default is not None else '') + ': ')
-        tty.flush()
-        answer = tty.readline()
+    # BufferedRandom (r+) requires seekability, which a real terminal lacks.
+    # Separate text readers/writers work on the actual ISO and SSH ptys.
+    with open('/dev/tty', 'r') as reader, open('/dev/tty', 'w') as writer:
+        writer.write(prompt + (f' [{default}]' if default is not None else '') + ': ')
+        writer.flush()
+        answer = reader.readline()
     if not answer:
         raise ValueError('Terminal closed; no action confirmed.')
     return answer.strip() or default
@@ -148,6 +150,9 @@ def validate_mounts(mode):
         raise ValueError('UEFI requires a separate writable FAT ESP at /mnt/boot.')
     for p in ('etc', 'etc/nixos', 'var', 'var/lib', 'nix', 'nix/store', 'home', 'boot'):
         regular(TARGET / p)
+    for p in (TARGET, TARGET / 'etc', TARGET / 'var', TARGET / 'var/lib'):
+        if p.exists() and (p.stat().st_uid != 0 or p.stat().st_mode & 0o022):
+            raise ValueError('Target system directory is not securely root-owned: ' + str(p))
     return {'root': root, 'boot': boot}
 
 
@@ -335,8 +340,6 @@ def prepare_source(source, revision, boot_mode, boot_disk, vm_key=None):
         run(['git', '-C', tree, '-c', 'user.name=Vivian installer', '-c', 'user.email=installer@localhost', 'commit', '-m', 'Install Vivian ' + revision + ' with generated host ' + hostname])
         run(['git', '-C', tree, 'remote', 'add', 'origin', 'https://github.com/Roshrak/Vivian.git'])
         os.rename(tree, target_source)
-        # Let the wheel user maintain the local source after installation.
-        run(['chown', '-R', '1000:100', target_source])
         return hostname, username, digest(target_source)[0]
     finally:
         shutil.rmtree(staging)  # exclusively this invocation's private staging tree
@@ -437,7 +440,7 @@ def main():
         run(['nix', *NIX_FLAGS, 'eval', '--no-write-lock-file', '--raw', ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel.drvPath'])
         if r['phase'] == 'prepared':
             # Build into the installed disk's store, not the ISO's RAM overlay.
-            built = run(['nix', *NIX_FLAGS, 'build', '--no-write-lock-file', '--no-link', '--print-out-paths', '--store', str(TARGET),
+            built = run(['nix', *NIX_FLAGS, 'build', '--no-write-lock-file', '--no-link', '--print-out-paths', '--option', 'max-jobs', '1', '--option', 'cores', '2', '--store', str(TARGET),
                          ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel'], True)
             outputs = built.splitlines()
             if len(outputs) != 1 or not outputs[0].startswith('/nix/store/'):
@@ -459,6 +462,9 @@ def main():
         verify_installed(r)
         r['phase'] = 'verified'
         save_json(receipt_file, r)
+        # Only after build/install verification, allow the installed wheel user
+        # to maintain the local source. No shared live-ISO UID can write it during preparation.
+        run(['chown', '-R', '1000:100', TARGET / 'etc/nixos'])
         print('\nSUCCESS: Vivian is installed; no automatic reboot was performed.')
         print('Installed host: ' + r['hostname'] + '; user: ' + r['username'])
         print('Exact upstream revision: ' + r['revision'])

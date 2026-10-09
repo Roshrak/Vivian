@@ -22,7 +22,10 @@ in lib.mkIf (host.portable or false) {
     }
   '' + lib.concatMapStrings (name: seed ".config/noctalia/${name}" (source + "/${name}")) [
     "config.toml" "99-comic-mono.toml" "99-media-paths.toml"
-  ] + lib.concatMapStrings (profile:
+  ] + lib.concatMapStrings (relative: seed ".local/state/noctalia/community-templates/${relative}"
+    (source + "/community-templates/${relative}")) [
+      "obs/matugen.obt" "prismlauncher/prismlauncher.json" "obsidian/obsidian.css"
+    ] + lib.concatMapStrings (profile:
     lib.concatMapStrings (name: seed ".config/theme-profiles/${profile}/config-home/noctalia/${name}"
       (source + "/profiles/${profile}/${name}"))
       (builtins.attrNames (builtins.readDir (source + "/profiles/${profile}")))) profiles);

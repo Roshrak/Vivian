@@ -2,6 +2,9 @@
 import importlib.util
 import json
 import os
+import pty
+import select
+import sys
 from pathlib import Path
 import stat
 import tempfile
@@ -114,6 +117,31 @@ class InstallerSafety(unittest.TestCase):
         with patch.object(installer, 'TARGET', target):
             with self.assertRaisesRegex(ValueError, 'preserved'): installer.prepare_source(self.root, 'rev', 'uefi', '/dev/vda')
         self.assertEqual((p / 'user-work').read_text(), 'KEEP')
+
+    def test_prompt_works_on_real_nonseekable_controlling_terminal(self):
+        pid, fd = pty.fork()
+        if pid == 0:
+            code = 'import importlib.util; s=importlib.util.spec_from_file_location("i",' + repr(str(Path(installer.__file__))) + '); i=importlib.util.module_from_spec(s); s.loader.exec_module(i); print("ANSWER="+i.ask("Pick"))'
+            os.execl(sys.executable, sys.executable, '-c', code)
+        data = b''
+        try:
+            ready, _, _ = select.select([fd], [], [], 5)
+            self.assertTrue(ready, 'Prompt did not appear')
+            data += os.read(fd, 4096)
+            self.assertIn(b'Pick:', data)
+            os.write(fd, b'fixture\n')
+            while select.select([fd], [], [], 5)[0]:
+                try:
+                    chunk = os.read(fd, 4096)
+                except OSError:
+                    break
+                if not chunk: break
+                data += chunk
+            _, status = os.waitpid(pid, 0)
+            self.assertEqual(os.waitstatus_to_exitcode(status), 0, data.decode(errors='replace'))
+            self.assertIn(b'ANSWER=fixture', data)
+        finally:
+            os.close(fd)
 
 
 if __name__ == '__main__':

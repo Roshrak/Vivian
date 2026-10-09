@@ -32,8 +32,8 @@ in a user timer; private Hermes cron prompts/history are not copied.
 
 Mutable state: existing files are preserved. Fresh hosts seed reviewed Noctalia
 TOML settings and wallpaper files. Application-generated databases, downloads,
-secrets, session histories and community-template caches are not copied.
-Some optional theme templates require their upstream runtime downloads.
+secrets and session histories are not copied. The three community template
+inputs actually referenced by the seeded profiles are included as public text assets.
 
 Boot/recovery: only Tonelico references existing local generations. New hosts
 begin their own generation history. UEFI systemd-boot and BIOS GRUB are selected
