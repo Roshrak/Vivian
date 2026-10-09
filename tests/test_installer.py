@@ -1,5 +1,6 @@
 """Safety tests use fixtures only; no disk or live system is ever changed."""
 import importlib.util
+import fcntl
 import json
 import os
 import pty
@@ -79,6 +80,18 @@ class InstallerSafety(unittest.TestCase):
         with patch.object(installer, 'TARGET', self.root / 'mnt'), patch.object(installer, 'choose_disk', return_value=self.node()), patch.object(installer, 'device_identity', return_value={'rdev': 123}), patch.object(installer, 'ask', return_value='unknown'), patch.object(installer, 'run') as commands:
             with self.assertRaises(ValueError): installer.prepare_disk('uefi')
             commands.assert_not_called()
+
+    def test_udev_settles_only_after_disk_lock_is_released(self):
+        disk = self.root / 'fixture-disk'; disk.write_bytes(b'fixture')
+        Path(str(disk) + '1').touch(); Path(str(disk) + '2').touch()
+        d = self.node(); d['path'] = str(disk)
+        locked = [False]
+        def flock(_fd, operation):
+            locked[0] = operation != fcntl.LOCK_UN
+        def command(args, capture=False):
+            if args[0] == 'udevadm': self.assertFalse(locked[0], 'Udev blocked behind installer disk lock')
+        with patch.object(installer, 'TARGET', self.root / 'mnt'), patch.object(installer, 'choose_disk', return_value=d), patch.object(installer, 'device_identity', return_value={'rdev': 0}), patch.object(installer, 'ask', side_effect=['E', 'ERASE ' + str(disk)]), patch.object(installer, 'run', side_effect=command), patch.object(installer, 'revalidate'), patch.object(installer.fcntl, 'flock', side_effect=flock):
+            installer.prepare_disk('uefi')
 
     def test_mounted_mnt_refused_before_erasure(self):
         with patch.object(installer, 'TARGET', self.root / 'mnt'), patch.object(installer, 'choose_disk', return_value=self.node()), patch.object(installer, 'device_identity', return_value={'rdev': 123}), patch.object(installer, 'ask', return_value='E'), patch.object(os.path, 'ismount', return_value=True), patch.object(installer, 'run') as commands:

@@ -202,8 +202,12 @@ def prepare_disk(mode):
                 run(['parted', '-s', disk['path'], 'set', '1', 'bios_grub', 'on'])
             start = '1025MiB' if mode == 'uefi' else '3MiB'
             run(['parted', '-s', disk['path'], 'mkpart', 'NixOS', 'ext4', start, '100%'])
-            run(['udevadm', 'settle'])
+            # Udev probes cooperate with this disk's flock. Waiting for them
+            # while retaining the exclusive lock deadlocks on a real installer.
+            fcntl.flock(pinned.fileno(), fcntl.LOCK_UN)
+            run(['udevadm', 'settle', '--timeout=30'])
             revalidate(expected)
+            fcntl.flock(pinned.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
             sep = 'p' if disk['path'][-1].isdigit() else ''
             rootdev, bootdev = disk['path'] + sep + '2', disk['path'] + sep + '1'
             for _ in range(50):
