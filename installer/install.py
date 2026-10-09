@@ -214,7 +214,10 @@ def prepare_disk(mode):
                 if Path(rootdev).exists():
                     break
                 time.sleep(.1)
-            run(['mkfs.ext4', '-L', 'nixos', rootdev])
+            # Erasure was explicitly confirmed for this pinned disk above.
+            # Recreated partitions may retain old signatures; do not stop at
+            # mkfs's secondary prompt after the guided confirmation.
+            run(['mkfs.ext4', '-F', '-L', 'nixos', rootdev])
             if mode == 'uefi':
                 run(['mkfs.fat', '-F', '32', '-n', 'EFI', bootdev])
     elif action == 'M':
