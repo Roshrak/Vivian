@@ -21,12 +21,14 @@ unsupported cards require a reviewed host override, rather than silent removal.
 
 External private dependencies: Telegram/API/AGY credentials, Hermes private
 configuration, Minecraft instances, browser profiles and personal files are
-not public. The precompiled private uinput_type helper has no available source
-and is not redistributed blindly; Minecraft input remains unverified until a
-reproducible helper is supplied. Two imperative AGY helper paths named in bridge
-prompts are outside the declarative configuration; one contains a credential.
-They are excluded rather than publishing private data. The bridge itself and
-all declarative agent packages/scripts are present.
+not public. A source-built uinput_type helper preserves the bridge's existing ASCII input
+protocol and guard checks; actual Minecraft targeting/input is a physical
+acceptance item. The referenced music helper is packaged with its Python
+dependency. The market helper reads real public results, keeps credentials out
+of source and requires --send-telegram for external upload. The older private
+helper's embedded credential and fabricated static offers are not published.
+The verified 720-minute cleanup intent uses the original bounded retention code
+in a user timer; private Hermes cron prompts/history are not copied.
 
 Mutable state: existing files are preserved. Fresh hosts seed reviewed Noctalia
 TOML settings and wallpaper files. Application-generated databases, downloads,

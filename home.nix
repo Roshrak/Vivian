@@ -18,6 +18,7 @@
     ./home/desktop/portable-seeds.nix
     ./home/desktop/gnome.nix
     ./home/services/agents.nix
+    ./home/services/portable-helpers.nix
     ./home/files/scripts.nix
   ];
 
