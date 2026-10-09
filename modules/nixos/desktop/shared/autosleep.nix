@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   hypridle = pkgs.hypridle;
@@ -38,7 +43,11 @@ let
   };
   autosleepIdleDaemon = pkgs.writeShellApplication {
     name = "autosleep-idle-daemon";
-    runtimeInputs = [ pkgs.coreutils pkgs.jq config.programs.noctalia.package ];
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.jq
+      config.programs.noctalia.package
+    ];
     text = ''
       set -euo pipefail
       case "''${THEME_PROFILE:-}" in

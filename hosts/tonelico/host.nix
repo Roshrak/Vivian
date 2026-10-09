@@ -13,7 +13,7 @@
   # These modules are useful on this machine but are not forced onto every
   # future host. New hosts can opt in by adding paths to their own host.nix.
   extraModules = [
-    ../../wave75-via.nix
-    ../../windows-vm.nix
+    ./keyboard.nix
+    ../../modules/nixos/features/virtualization.nix
   ];
 }

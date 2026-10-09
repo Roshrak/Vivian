@@ -1,19 +1,26 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  portable = path: lib.replaceStrings [ "/home/aesc" ]
-    [ config.home.homeDirectory ] (builtins.readFile path);
+  portable =
+    path: lib.replaceStrings [ "/home/aesc" ] [ config.home.homeDirectory ] (builtins.readFile path);
 in
 {
   # Preserve the existing grammars and package/session ownership. In
   # particular Hyprland uses Lua; the ordinary HM text config generator would
   # change that grammar. NixOS still owns compositor and greeter integration.
-  xdg.configFile."niri/config.kdl".text = lib.replaceStrings
-    [ ''include "colors.kdl"'' ]
-    [ ''include "${config.xdg.configHome}/niri/colors.kdl"'' ]
-    (portable ../files/config/niri/config.kdl);
+  xdg.configFile."niri/config.kdl".text =
+    lib.replaceStrings
+      [ ''include "colors.kdl"'' ]
+      [ ''include "${config.xdg.configHome}/niri/colors.kdl"'' ]
+      (portable ../files/config/niri/config.kdl);
   xdg.configFile."sway/config".text = portable ../files/config/sway/config;
   xdg.configFile."sway/noctalia".text = portable ../files/config/sway/noctalia;
-  xdg.configFile."hypr/hyprland.lua".text = portable ../../desktop/hyprland/hyprland.lua;
+  xdg.configFile."hypr/hyprland.lua".text =
+    portable ../../modules/nixos/desktop/sessions/hyprland/hyprland.lua;
 
   # Mango's animation helper, Noctalia, Fcitx, GTK, Plasma and XFCE write their
   # own runtime settings. Seed portable defaults only on a new machine; never

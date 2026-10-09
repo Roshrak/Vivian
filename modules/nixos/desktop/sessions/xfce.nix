@@ -1,6 +1,11 @@
 # XFCE on native Xorg/X11 as an additive fallback desktop.
 # greetd + Noctalia Greeter remain the login stack; all Wayland sessions stay enabled.
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   greeter = config.services.displayManager.noctalia-greeter;
@@ -56,7 +61,10 @@ let
   '';
   noctaliaXsession = pkgs.writeShellApplication {
     name = "noctalia-greeter-xsession";
-    runtimeInputs = [ pkgs.xinit pkgs.coreutils ];
+    runtimeInputs = [
+      pkgs.xinit
+      pkgs.coreutils
+    ];
     text = ''
       if [ "$#" -lt 1 ]; then
         echo "usage: noctalia-greeter-xsession <session-command> [args...]" >&2
@@ -435,7 +443,10 @@ let
   };
   xfceSharedKeybindings = pkgs.writeShellApplication {
     name = "xfce-apply-shared-keybindings";
-    runtimeInputs = [ pkgs.xfconf pkgs.xset ];
+    runtimeInputs = [
+      pkgs.xfconf
+      pkgs.xset
+    ];
     text = ''
       set_property() {
         local channel="$1"

@@ -31,7 +31,7 @@
     };
   };
 
-  # Noctalia Greeter session catalogue now lives in desktop/session-catalog.nix
+  # Noctalia Greeter session catalogue now lives in ../shared/session-catalog.nix
   # and is an explicit 11-session allowlist.
 
   # ---- Minimal application set ---------------------------------------------
@@ -39,17 +39,17 @@
   # mpv remain the global tools. Core Plasma pieces (Dolphin, Spectacle,
   # KRunner, System Settings, Info Center) are kept.
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    konsole      # terminal -> kitty
-    kate         # editor   -> neovim / nano
-    gwenview     # images   -> existing workflow
-    okular       # PDFs     -> existing workflow
-    elisa        # music    -> mpv
-    ark          # archives -> file-roller
-    khelpcenter  # docs     -> web
-    discover     # store/updater not wanted
+    konsole # terminal -> kitty
+    kate # editor   -> neovim / nano
+    gwenview # images   -> existing workflow
+    okular # PDFs     -> existing workflow
+    elisa # music    -> mpv
+    ark # archives -> file-roller
+    khelpcenter # docs     -> web
+    discover # store/updater not wanted
   ];
 
-  # Portal ownership is declared centrally in desktop/portals.nix using the
+  # Portal ownership is declared centrally in ../shared/portals.nix using the
   # NixOS typed xdg.portal.config option. The evaluated Plasma config selects
   # KDE for desktop interfaces and KWallet for Secret; it does not own the
   # login manager and cannot override the per-session routes of other desktops.

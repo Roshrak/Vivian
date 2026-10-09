@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   hardware.keyboard.qmk.enable = true;
 
@@ -6,7 +6,9 @@
     via
   ];
 
-  services.udev.packages = with pkgs; [
-    via
-  ];
+  services.udev.packages =
+    with pkgs;
+    lib.mkBefore [
+      via
+    ];
 }

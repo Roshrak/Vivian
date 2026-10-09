@@ -13,11 +13,8 @@
 
   # Use the existing Noctalia compositor shell and its own polkit agent.
   # programs.hyprland supplies the matching portal backend in this nixpkgs.
+  # Shared screenshot tools and Xwayland bridge live in core/packages.nix.
   environment.systemPackages = with pkgs; [
-    xwayland-satellite
-    wl-clipboard
-    grim
-    slurp
     satty
   ];
 }

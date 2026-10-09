@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   sessionLeaseGuard = ''
@@ -222,208 +227,208 @@ let
   '';
 
   themeProfileActivate = pkgs.writeShellScriptBin "theme-profile-activate" ''
-    set -euo pipefail
+        set -euo pipefail
 
-    usage() {
-      echo "Usage: theme-profile-activate <niri|sway|mango|hyprland|kde>" >&2
-      exit 2
-    }
+        usage() {
+          echo "Usage: theme-profile-activate <niri|sway|mango|hyprland|kde>" >&2
+          exit 2
+        }
 
-    [ $# -ge 1 ] || usage
-    PROFILE="$1"
+        [ $# -ge 1 ] || usage
+        PROFILE="$1"
 
-    case "$PROFILE" in
-      niri|sway|mango|hyprland|kde) ;;
-      *) usage ;;
-    esac
+        case "$PROFILE" in
+          niri|sway|mango|hyprland|kde) ;;
+          *) usage ;;
+        esac
 
-    /run/current-system/sw/bin/theme-session-admit || exit $?
+        /run/current-system/sw/bin/theme-session-admit || exit $?
 
-    UID_ME="$(id -u)"
-    STATE_ROOT="$HOME/.local/state/theme-profiles"
-    CONFIG_ROOT="$HOME/.config/theme-profiles"
+        UID_ME="$(id -u)"
+        STATE_ROOT="$HOME/.local/state/theme-profiles"
+        CONFIG_ROOT="$HOME/.config/theme-profiles"
 
-    mkdir -p "$STATE_ROOT/$PROFILE/generated/gtk3" \
-             "$STATE_ROOT/$PROFILE/generated/gtk4" \
-             "$STATE_ROOT/$PROFILE/generated/qt" \
-             "$CONFIG_ROOT/$PROFILE/gtk-3.0" \
-             "$CONFIG_ROOT/$PROFILE/gtk-4.0" \
-             "$HOME/.config/kitty/profiles/$PROFILE" \
-             "$HOME/.config/gtk-3.0" \
-             "$HOME/.config/gtk-4.0" \
-             "$HOME/.config/qt5ct/colors" \
-             "$HOME/.config/qt6ct/colors"
+        mkdir -p "$STATE_ROOT/$PROFILE/generated/gtk3" \
+                 "$STATE_ROOT/$PROFILE/generated/gtk4" \
+                 "$STATE_ROOT/$PROFILE/generated/qt" \
+                 "$CONFIG_ROOT/$PROFILE/gtk-3.0" \
+                 "$CONFIG_ROOT/$PROFILE/gtk-4.0" \
+                 "$HOME/.config/kitty/profiles/$PROFILE" \
+                 "$HOME/.config/gtk-3.0" \
+                 "$HOME/.config/gtk-4.0" \
+                 "$HOME/.config/qt5ct/colors" \
+                 "$HOME/.config/qt6ct/colors"
 
-    atomic_copy() {
-      local from="$1" to="$2" tmpdir tmp
-      [ -f "$from" ] || return 0
-      tmpdir="$(dirname "$to")"
-      mkdir -p "$tmpdir"
-      tmp="$(mktemp "$tmpdir/.act.XXXXXX")"
-      cp -a "$from" "$tmp"
-      mv -f "$tmp" "$to"
-    }
+        atomic_copy() {
+          local from="$1" to="$2" tmpdir tmp
+          [ -f "$from" ] || return 0
+          tmpdir="$(dirname "$to")"
+          mkdir -p "$tmpdir"
+          tmp="$(mktemp "$tmpdir/.act.XXXXXX")"
+          cp -a "$from" "$tmp"
+          mv -f "$tmp" "$to"
+        }
 
-    # 1. Kitty configuration
-    cat > "$HOME/.config/kitty/profiles/$PROFILE/kitty.conf" << 'KEOF'
-include /home/aesc/.config/kitty/common.conf
-include theme.conf
-KEOF
+        # 1. Kitty configuration
+        cat > "$HOME/.config/kitty/profiles/$PROFILE/kitty.conf" << 'KEOF'
+    include /home/aesc/.config/kitty/common.conf
+    include theme.conf
+    KEOF
 
-    # Ensure canonical ~/.config/kitty/kitty.conf is a stable fallback
-    if [ ! -f "$HOME/.config/kitty/kitty.conf" ] || grep -q "THEME_PROFILE" "$HOME/.config/kitty/kitty.conf"; then
-      cat > "$HOME/.config/kitty/kitty.conf" << 'KEOF'
-include /home/aesc/.config/kitty/common.conf
-include /home/aesc/.config/kitty/themes/default.conf
-KEOF
-    fi
-
-    mkdir -p "$HOME/.config/kitty/themes"
-    if [ ! -f "$HOME/.config/kitty/themes/default.conf" ]; then
-      if [ -f "$HOME/.config/kitty/profiles/niri/theme.conf" ]; then
-        cp -a "$HOME/.config/kitty/profiles/niri/theme.conf" "$HOME/.config/kitty/themes/default.conf"
-      fi
-    fi
-
-    # 2. GTK Setup
-    for v in 3.0 4.0; do
-      gtk_dir="$HOME/.config/gtk-$v"
-      if [ -f "$CONFIG_ROOT/$PROFILE/gtk-$v/settings.ini" ]; then
-        atomic_copy "$CONFIG_ROOT/$PROFILE/gtk-$v/settings.ini" "$gtk_dir/settings.ini"
-      fi
-
-      # Password fields and search boxes use GTK's error bell independently
-      # from desktop event sounds. Reassert these after every theme-profile
-      # copy so switching desktops can never restore an audible bell.
-      for key in \
-        gtk-error-bell \
-        gtk-enable-event-sounds \
-        gtk-enable-input-feedback-sounds; do
-        if grep -q "^$key=" "$gtk_dir/settings.ini"; then
-          ${pkgs.gnused}/bin/sed -i "s/^$key=.*/$key=false/" "$gtk_dir/settings.ini"
-        else
-          printf '%s=false\n' "$key" >> "$gtk_dir/settings.ini"
+        # Ensure canonical ~/.config/kitty/kitty.conf is a stable fallback
+        if [ ! -f "$HOME/.config/kitty/kitty.conf" ] || grep -q "THEME_PROFILE" "$HOME/.config/kitty/kitty.conf"; then
+          cat > "$HOME/.config/kitty/kitty.conf" << 'KEOF'
+    include /home/aesc/.config/kitty/common.conf
+    include /home/aesc/.config/kitty/themes/default.conf
+    KEOF
         fi
-      done
 
-      gtk_css="$gtk_dir/gtk.css"
-      if [ ! -f "$gtk_css" ] || ! grep -q "theme-active.css" "$gtk_css"; then
-        printf "@import 'colors.css';\n@import 'theme-active.css';\n" > "$gtk_css"
-      fi
-    done
-
-    # Plasma and KDE applications keep a separate bell preference. This also
-    # covers KScreenLocker and survives later theme/profile activation.
-    ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 \
-      --file "$HOME/.config/kdeglobals" \
-      --group General --key UseSystemBell false
-    ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 \
-      --file "$HOME/.config/kaccessrc" \
-      --group Bell --key SystemBell false
-    ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 \
-      --file "$HOME/.config/kaccessrc" \
-      --group Bell --key ArtsBell false
-
-    if [ "$PROFILE" != "kde" ]; then
-      if [ -f "$STATE_ROOT/$PROFILE/generated/gtk3/noctalia.css" ]; then
-        atomic_copy "$STATE_ROOT/$PROFILE/generated/gtk3/noctalia.css" "$HOME/.config/gtk-3.0/theme-active.css"
-      elif [ -f "$CONFIG_ROOT/$PROFILE/gtk-3.0/noctalia.css" ]; then
-        atomic_copy "$CONFIG_ROOT/$PROFILE/gtk-3.0/noctalia.css" "$HOME/.config/gtk-3.0/theme-active.css"
-      else
-        printf "/* $PROFILE GTK 3 active */\n" > "$HOME/.config/gtk-3.0/theme-active.css"
-      fi
-
-      if [ -f "$STATE_ROOT/$PROFILE/generated/gtk4/noctalia.css" ]; then
-        atomic_copy "$STATE_ROOT/$PROFILE/generated/gtk4/noctalia.css" "$HOME/.config/gtk-4.0/theme-active.css"
-      elif [ -f "$CONFIG_ROOT/$PROFILE/gtk-4.0/noctalia.css" ]; then
-        atomic_copy "$CONFIG_ROOT/$PROFILE/gtk-4.0/noctalia.css" "$HOME/.config/gtk-4.0/theme-active.css"
-      else
-        printf "/* $PROFILE GTK 4 active */\n" > "$HOME/.config/gtk-4.0/theme-active.css"
-      fi
-
-      if [ -f "$CONFIG_ROOT/$PROFILE/gtkrc-2.0" ]; then
-        atomic_copy "$CONFIG_ROOT/$PROFILE/gtkrc-2.0" "$HOME/.gtkrc-2.0"
-      fi
-
-      if [ -f "$STATE_ROOT/$PROFILE/generated/qt/noctalia.conf" ]; then
-        atomic_copy "$STATE_ROOT/$PROFILE/generated/qt/noctalia.conf" "$HOME/.config/qt5ct/colors/noctalia.conf"
-        atomic_copy "$STATE_ROOT/$PROFILE/generated/qt/noctalia.conf" "$HOME/.config/qt6ct/colors/noctalia.conf"
-      elif [ -f "$CONFIG_ROOT/$PROFILE/qt6ct/colors/noctalia.conf" ]; then
-        atomic_copy "$CONFIG_ROOT/$PROFILE/qt6ct/colors/noctalia.conf" "$HOME/.config/qt5ct/colors/noctalia.conf"
-        atomic_copy "$CONFIG_ROOT/$PROFILE/qt6ct/colors/noctalia.conf" "$HOME/.config/qt6ct/colors/noctalia.conf"
-      fi
-
-      if [ ! -f "$HOME/.config/qt6ct/qt6ct.conf" ] || [ ! -s "$HOME/.config/qt6ct/qt6ct.conf" ]; then
-        cat > "$HOME/.config/qt6ct/qt6ct.conf" << 'QTEOF'
-[Appearance]
-color_scheme_path=/home/aesc/.config/qt6ct/colors/noctalia.conf
-custom_palette=true
-style=Fusion
-QTEOF
-      fi
-
-      case "$PROFILE" in
-        niri)
-          if [ -f "$STATE_ROOT/niri/generated/niri/colors.kdl" ]; then
-            atomic_copy "$STATE_ROOT/niri/generated/niri/colors.kdl" "$HOME/.config/niri/colors.kdl"
-          elif [ -f "$CONFIG_ROOT/niri/colors.kdl" ]; then
-            atomic_copy "$CONFIG_ROOT/niri/colors.kdl" "$HOME/.config/niri/colors.kdl"
+        mkdir -p "$HOME/.config/kitty/themes"
+        if [ ! -f "$HOME/.config/kitty/themes/default.conf" ]; then
+          if [ -f "$HOME/.config/kitty/profiles/niri/theme.conf" ]; then
+            cp -a "$HOME/.config/kitty/profiles/niri/theme.conf" "$HOME/.config/kitty/themes/default.conf"
           fi
-          ;;
-        sway)
-          if [ -f "$STATE_ROOT/sway/generated/sway/colors" ]; then
-            atomic_copy "$STATE_ROOT/sway/generated/sway/colors" "$HOME/.config/sway/colors"
-          elif [ -f "$CONFIG_ROOT/sway/colors" ]; then
-            atomic_copy "$CONFIG_ROOT/sway/colors" "$HOME/.config/sway/colors"
+        fi
+
+        # 2. GTK Setup
+        for v in 3.0 4.0; do
+          gtk_dir="$HOME/.config/gtk-$v"
+          if [ -f "$CONFIG_ROOT/$PROFILE/gtk-$v/settings.ini" ]; then
+            atomic_copy "$CONFIG_ROOT/$PROFILE/gtk-$v/settings.ini" "$gtk_dir/settings.ini"
           fi
-          ;;
-        mango)
-          if [ -f "$STATE_ROOT/mango/generated/mango/colors.conf" ]; then
-            atomic_copy "$STATE_ROOT/mango/generated/mango/colors.conf" "$HOME/.config/mango/noctalia.conf"
-          elif [ -f "$CONFIG_ROOT/mango/colors.conf" ]; then
-            atomic_copy "$CONFIG_ROOT/mango/colors.conf" "$HOME/.config/mango/noctalia.conf"
+
+          # Password fields and search boxes use GTK's error bell independently
+          # from desktop event sounds. Reassert these after every theme-profile
+          # copy so switching desktops can never restore an audible bell.
+          for key in \
+            gtk-error-bell \
+            gtk-enable-event-sounds \
+            gtk-enable-input-feedback-sounds; do
+            if grep -q "^$key=" "$gtk_dir/settings.ini"; then
+              ${pkgs.gnused}/bin/sed -i "s/^$key=.*/$key=false/" "$gtk_dir/settings.ini"
+            else
+              printf '%s=false\n' "$key" >> "$gtk_dir/settings.ini"
+            fi
+          done
+
+          gtk_css="$gtk_dir/gtk.css"
+          if [ ! -f "$gtk_css" ] || ! grep -q "theme-active.css" "$gtk_css"; then
+            printf "@import 'colors.css';\n@import 'theme-active.css';\n" > "$gtk_css"
           fi
-          ;;
-      esac
+        done
 
-      systemctl --user set-environment \
-        THEME_PROFILE="$PROFILE" \
-        KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/$PROFILE" \
-        NOCTALIA_STATE_HOME="$STATE_ROOT/$PROFILE" \
-        NOCTALIA_CONFIG_HOME="$CONFIG_ROOT/$PROFILE/config-home" \
-        QT_QPA_PLATFORMTHEME="qt6ct" 2>/dev/null || true
+        # Plasma and KDE applications keep a separate bell preference. This also
+        # covers KScreenLocker and survives later theme/profile activation.
+        ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 \
+          --file "$HOME/.config/kdeglobals" \
+          --group General --key UseSystemBell false
+        ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 \
+          --file "$HOME/.config/kaccessrc" \
+          --group Bell --key SystemBell false
+        ${pkgs.kdePackages.kconfig}/bin/kwriteconfig6 \
+          --file "$HOME/.config/kaccessrc" \
+          --group Bell --key ArtsBell false
 
-      if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-        dbus-update-activation-environment --systemd \
-          THEME_PROFILE="$PROFILE" \
-          KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/$PROFILE" \
-          NOCTALIA_STATE_HOME="$STATE_ROOT/$PROFILE" \
-          NOCTALIA_CONFIG_HOME="$CONFIG_ROOT/$PROFILE/config-home" \
-          QT_QPA_PLATFORMTHEME="qt6ct" 2>/dev/null || true
-      fi
+        if [ "$PROFILE" != "kde" ]; then
+          if [ -f "$STATE_ROOT/$PROFILE/generated/gtk3/noctalia.css" ]; then
+            atomic_copy "$STATE_ROOT/$PROFILE/generated/gtk3/noctalia.css" "$HOME/.config/gtk-3.0/theme-active.css"
+          elif [ -f "$CONFIG_ROOT/$PROFILE/gtk-3.0/noctalia.css" ]; then
+            atomic_copy "$CONFIG_ROOT/$PROFILE/gtk-3.0/noctalia.css" "$HOME/.config/gtk-3.0/theme-active.css"
+          else
+            printf "/* $PROFILE GTK 3 active */\n" > "$HOME/.config/gtk-3.0/theme-active.css"
+          fi
 
-    else
-      printf "/* KDE session: Noctalia CSS inactive */\n" > "$HOME/.config/gtk-3.0/theme-active.css"
-      printf "/* KDE session: Noctalia CSS inactive */\n" > "$HOME/.config/gtk-4.0/theme-active.css"
+          if [ -f "$STATE_ROOT/$PROFILE/generated/gtk4/noctalia.css" ]; then
+            atomic_copy "$STATE_ROOT/$PROFILE/generated/gtk4/noctalia.css" "$HOME/.config/gtk-4.0/theme-active.css"
+          elif [ -f "$CONFIG_ROOT/$PROFILE/gtk-4.0/noctalia.css" ]; then
+            atomic_copy "$CONFIG_ROOT/$PROFILE/gtk-4.0/noctalia.css" "$HOME/.config/gtk-4.0/theme-active.css"
+          else
+            printf "/* $PROFILE GTK 4 active */\n" > "$HOME/.config/gtk-4.0/theme-active.css"
+          fi
 
-      systemctl --user set-environment \
-        THEME_PROFILE="kde" \
-        KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/kde" 2>/dev/null || true
+          if [ -f "$CONFIG_ROOT/$PROFILE/gtkrc-2.0" ]; then
+            atomic_copy "$CONFIG_ROOT/$PROFILE/gtkrc-2.0" "$HOME/.gtkrc-2.0"
+          fi
 
-      systemctl --user unset-environment \
-        NOCTALIA_STATE_HOME \
-        NOCTALIA_CONFIG_HOME \
-        QT_QPA_PLATFORMTHEME 2>/dev/null || true
+          if [ -f "$STATE_ROOT/$PROFILE/generated/qt/noctalia.conf" ]; then
+            atomic_copy "$STATE_ROOT/$PROFILE/generated/qt/noctalia.conf" "$HOME/.config/qt5ct/colors/noctalia.conf"
+            atomic_copy "$STATE_ROOT/$PROFILE/generated/qt/noctalia.conf" "$HOME/.config/qt6ct/colors/noctalia.conf"
+          elif [ -f "$CONFIG_ROOT/$PROFILE/qt6ct/colors/noctalia.conf" ]; then
+            atomic_copy "$CONFIG_ROOT/$PROFILE/qt6ct/colors/noctalia.conf" "$HOME/.config/qt5ct/colors/noctalia.conf"
+            atomic_copy "$CONFIG_ROOT/$PROFILE/qt6ct/colors/noctalia.conf" "$HOME/.config/qt6ct/colors/noctalia.conf"
+          fi
 
-      if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-        dbus-update-activation-environment --systemd \
-          THEME_PROFILE="kde" \
-          KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/kde" 2>/dev/null || true
-      fi
-    fi
+          if [ ! -f "$HOME/.config/qt6ct/qt6ct.conf" ] || [ ! -s "$HOME/.config/qt6ct/qt6ct.conf" ]; then
+            cat > "$HOME/.config/qt6ct/qt6ct.conf" << 'QTEOF'
+    [Appearance]
+    color_scheme_path=/home/aesc/.config/qt6ct/colors/noctalia.conf
+    custom_palette=true
+    style=Fusion
+    QTEOF
+          fi
 
-    pkill -SIGUSR1 -u "$UID_ME" -x kitty 2>/dev/null || true
-    echo "Theme profile activated: $PROFILE"
+          case "$PROFILE" in
+            niri)
+              if [ -f "$STATE_ROOT/niri/generated/niri/colors.kdl" ]; then
+                atomic_copy "$STATE_ROOT/niri/generated/niri/colors.kdl" "$HOME/.config/niri/colors.kdl"
+              elif [ -f "$CONFIG_ROOT/niri/colors.kdl" ]; then
+                atomic_copy "$CONFIG_ROOT/niri/colors.kdl" "$HOME/.config/niri/colors.kdl"
+              fi
+              ;;
+            sway)
+              if [ -f "$STATE_ROOT/sway/generated/sway/colors" ]; then
+                atomic_copy "$STATE_ROOT/sway/generated/sway/colors" "$HOME/.config/sway/colors"
+              elif [ -f "$CONFIG_ROOT/sway/colors" ]; then
+                atomic_copy "$CONFIG_ROOT/sway/colors" "$HOME/.config/sway/colors"
+              fi
+              ;;
+            mango)
+              if [ -f "$STATE_ROOT/mango/generated/mango/colors.conf" ]; then
+                atomic_copy "$STATE_ROOT/mango/generated/mango/colors.conf" "$HOME/.config/mango/noctalia.conf"
+              elif [ -f "$CONFIG_ROOT/mango/colors.conf" ]; then
+                atomic_copy "$CONFIG_ROOT/mango/colors.conf" "$HOME/.config/mango/noctalia.conf"
+              fi
+              ;;
+          esac
+
+          systemctl --user set-environment \
+            THEME_PROFILE="$PROFILE" \
+            KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/$PROFILE" \
+            NOCTALIA_STATE_HOME="$STATE_ROOT/$PROFILE" \
+            NOCTALIA_CONFIG_HOME="$CONFIG_ROOT/$PROFILE/config-home" \
+            QT_QPA_PLATFORMTHEME="qt6ct" 2>/dev/null || true
+
+          if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+            dbus-update-activation-environment --systemd \
+              THEME_PROFILE="$PROFILE" \
+              KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/$PROFILE" \
+              NOCTALIA_STATE_HOME="$STATE_ROOT/$PROFILE" \
+              NOCTALIA_CONFIG_HOME="$CONFIG_ROOT/$PROFILE/config-home" \
+              QT_QPA_PLATFORMTHEME="qt6ct" 2>/dev/null || true
+          fi
+
+        else
+          printf "/* KDE session: Noctalia CSS inactive */\n" > "$HOME/.config/gtk-3.0/theme-active.css"
+          printf "/* KDE session: Noctalia CSS inactive */\n" > "$HOME/.config/gtk-4.0/theme-active.css"
+
+          systemctl --user set-environment \
+            THEME_PROFILE="kde" \
+            KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/kde" 2>/dev/null || true
+
+          systemctl --user unset-environment \
+            NOCTALIA_STATE_HOME \
+            NOCTALIA_CONFIG_HOME \
+            QT_QPA_PLATFORMTHEME 2>/dev/null || true
+
+          if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+            dbus-update-activation-environment --systemd \
+              THEME_PROFILE="kde" \
+              KITTY_CONFIG_DIRECTORY="$HOME/.config/kitty/profiles/kde" 2>/dev/null || true
+          fi
+        fi
+
+        pkill -SIGUSR1 -u "$UID_ME" -x kitty 2>/dev/null || true
+        echo "Theme profile activated: $PROFILE"
   '';
 
   themeProfileSync = pkgs.writeShellScriptBin "theme-profile-sync" ''

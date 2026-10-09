@@ -11,20 +11,48 @@ let
     switch-to-application-${n}=[]
   '') (map toString (lib.range 1 9));
   customCommands = [
-    { name = "Terminal"; command = "kitty"; binding = "<Super>Return"; }
-    { name = "Files"; command = "nautilus"; binding = "<Super>e"; }
-    { name = "Browser"; command = "chromium"; binding = "<Super>z"; }
-    { name = "Settings"; command = "gnome-control-center"; binding = "<Super>comma"; }
-    { name = "Fcitx toggle"; command = "fcitx5-remote -t"; binding = "<Alt>z"; }
-    { name = "Logout menu"; command = "gnome-session-quit --logout-dialog"; binding = "<Super><Shift>e"; }
+    {
+      name = "Terminal";
+      command = "kitty";
+      binding = "<Super>Return";
+    }
+    {
+      name = "Files";
+      command = "nautilus";
+      binding = "<Super>e";
+    }
+    {
+      name = "Browser";
+      command = "chromium";
+      binding = "<Super>z";
+    }
+    {
+      name = "Settings";
+      command = "gnome-control-center";
+      binding = "<Super>comma";
+    }
+    {
+      name = "Fcitx toggle";
+      command = "fcitx5-remote -t";
+      binding = "<Alt>z";
+    }
+    {
+      name = "Logout menu";
+      command = "gnome-session-quit --logout-dialog";
+      binding = "<Super><Shift>e";
+    }
   ];
-  customPaths = lib.genList (i: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString i}/") (builtins.length customCommands);
-  customCommandDconfSettings = lib.listToAttrs (lib.imap0 (i: item: {
-    name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString i}";
-    value = {
-      inherit (item) name command binding;
-    };
-  }) customCommands);
+  customPaths = lib.genList (
+    i: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString i}/"
+  ) (builtins.length customCommands);
+  customCommandDconfSettings = lib.listToAttrs (
+    lib.imap0 (i: item: {
+      name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString i}";
+      value = {
+        inherit (item) name command binding;
+      };
+    }) customCommands
+  );
   windowRules = pkgs.stdenvNoCC.mkDerivation {
     pname = "tonelico-gnome-window-rules";
     version = "2";

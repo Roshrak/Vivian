@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./input-devices.nix ];
   # Acer Swift SFG16-72 / Intel Core Ultra 5 125U-specific tuning.
   # Keep vendor-specific settings here instead of in shared configuration.nix.
   hardware.cpu.intel.updateMicrocode = true;

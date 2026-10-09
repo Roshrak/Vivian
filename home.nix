@@ -3,8 +3,17 @@
   imports = [
     ./home/programs/shell.nix
     ./home/programs/git.nix
-    ./home/programs/editors.nix
-    ./home/programs/applications.nix
+    ./home/programs/kitty.nix
+    ./home/programs/neovim.nix
+    ./home/programs/fastfetch.nix
+    ./home/packages/communication.nix
+    ./home/packages/browsers.nix
+    ./home/packages/productivity.nix
+    ./home/packages/media.nix
+    ./home/packages/gaming.nix
+    ./home/packages/development.nix
+    ./home/packages/utilities.nix
+    ./home/packages/ai.nix
     ./home/desktop/configuration.nix
     ./home/desktop/gnome.nix
     ./home/services/agents.nix

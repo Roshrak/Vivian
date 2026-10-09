@@ -14,11 +14,11 @@
     mango.url = "github:mangowm/mango";
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
     lotus.url = "github:LotusInputMethod/fcitx5-lotus";
-    niri.url = "github:epireyn/niri-flake";          # NEW - Phase 5
+    niri.url = "github:epireyn/niri-flake"; # NEW - Phase 5
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; 
+    };
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     # Match the newer AGY and OpenCode builds already installed in the user
     # profile while moving them into the NixOS system profile.
@@ -27,7 +27,8 @@
     hermes-agent.url = "tarball+https://codeload.github.com/NousResearch/hermes-agent/tar.gz/refs/tags/v2026.9.24";
   };
 
-  outputs = inputs@{ nixpkgs, mango, noctalia, ... }:
+  outputs =
+    inputs@{ nixpkgs, ... }:
     let
       lib = nixpkgs.lib;
       hostRoot = ./hosts;
@@ -36,15 +37,17 @@
       # A host becomes a flake configuration when its directory contains both
       # host.nix (small metadata) and hardware-configuration.nix (generated on
       # that physical machine). Templates and documentation are ignored.
-      hostKeys = builtins.attrNames (lib.filterAttrs
-        (name: type:
+      hostKeys = builtins.attrNames (
+        lib.filterAttrs (
+          name: type:
           type == "directory"
           && builtins.pathExists (hostRoot + "/${name}/host.nix")
-          && builtins.pathExists
-            (hostRoot + "/${name}/hardware-configuration.nix"))
-        hostEntries);
+          && builtins.pathExists (hostRoot + "/${name}/hardware-configuration.nix")
+        ) hostEntries
+      );
 
-      mkHost = hostKey:
+      mkHost =
+        hostKey:
         let
           hostPath = hostRoot + "/${hostKey}";
           host = import (hostPath + "/host.nix");
@@ -52,47 +55,30 @@
           hostModule = hostPath + "/default.nix";
           extraModules = host.extraModules or [ ];
         in
-        lib.nameValuePair hostKey (lib.nixosSystem {
-          system = host.system;
-          specialArgs = { inherit inputs host; };
-          modules = [
-            (hostPath + "/hardware-configuration.nix")
-            hostModule
-            inputs.home-manager.nixosModules.home-manager
-            ./home-manager.nix
-            ({ ... }: {
-              # Codex is intentionally sourced from the dedicated pinned
-              # input above instead of upgrading all NixOS packages.
-              nixpkgs.overlays = [
-                (_final: _prev: { codex = codexPackage; })
-              ];
-            })
-            mango.nixosModules.mango
-            ./comic-mono.nix
-            noctalia.nixosModules.default
-            inputs.noctalia-greeter.nixosModules.default
-            inputs.lotus.nixosModules.fcitx5-lotus
-            ./apps-and-lotus.nix
-            ./desktop/plasma.nix      # KDE Plasma 6 second session
-            ./desktop/niri.nix        # Niri third session
-            ./desktop/sway.nix        # Sway + Noctalia v5 fourth session
-            ./desktop/monitor-layout.nix # Main display and hotplug placement policies
-            ./desktop/xfce.nix        # XFCE fallback session on native Xorg/X11
-            ./desktop/xfwm4-fix.nix   # External-compositor guard for XFWM4 4.20.0
-            ./desktop/hyprland.nix    # Plain Hyprland, no UWSM
-            ./desktop/gnome.nix       # Optional GNOME Wayland session under greetd
-            ./desktop/overview.nix    # Shared overview keyboard/mouse shortcuts
-            ./desktop/portals.nix     # Per-session portal routing
-            ./desktop/session-lifecycle.nix # Per-session environment bridge
-            ./desktop/autosleep.nix     # Persistent cross-desktop lock/display policy
-            ./desktop/session-catalog.nix # Curated greetd/Noctalia session entries
-            ./desktop/theme-profiles.nix # Isolated theme profiles for Niri, Sway, Mango, KDE
-            ./configuration.nix
-            ({ ... }: {
-              networking.hostName = host.hostName;
-            })
-          ] ++ extraModules;
-        });
+        lib.nameValuePair hostKey (
+          lib.nixosSystem {
+            system = host.system;
+            specialArgs = { inherit inputs host; };
+            modules = [
+              (hostPath + "/hardware-configuration.nix")
+              hostModule
+              inputs.home-manager.nixosModules.home-manager
+              ./home-manager.nix
+              ({ ... }: {
+                # Codex is intentionally sourced from the dedicated pinned
+                # input above instead of upgrading all NixOS packages.
+                nixpkgs.overlays = [
+                  (_final: _prev: { codex = codexPackage; })
+                ];
+              })
+              ./configuration.nix
+              ({ ... }: {
+                networking.hostName = host.hostName;
+              })
+            ]
+            ++ extraModules;
+          }
+        );
     in
     {
       # Keep the directory-based target for installation/backup tooling and
@@ -100,10 +86,13 @@
       nixosConfigurations =
         let
           configurations = builtins.listToAttrs (map mkHost hostKeys);
-          hostnameAliases = builtins.listToAttrs (map (key:
-            lib.nameValuePair (import (hostRoot + "/${key}/host.nix")).hostName
-              configurations.${key}) hostKeys);
-        in configurations // hostnameAliases;
+          hostnameAliases = builtins.listToAttrs (
+            map (
+              key: lib.nameValuePair (import (hostRoot + "/${key}/host.nix")).hostName configurations.${key}
+            ) hostKeys
+          );
+        in
+        configurations // hostnameAliases;
     };
 
   nixConfig = {

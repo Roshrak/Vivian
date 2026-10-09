@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   themeSessionLease = pkgs.writeShellScriptBin "theme-session-lease" ''
@@ -57,7 +62,8 @@ let
     inherit (config.services.desktopManager.gnome)
       extraGSettingsOverrides
       extraGSettingsOverridePackages
-      favoriteAppsOverride;
+      favoriteAppsOverride
+      ;
   };
   # Place the startup pointer on the laptop panel where compositor IPC allows
   # a safe one-shot warp. Niri centers the cursor on its focus-at-startup
