@@ -22,6 +22,9 @@ and Home Manager configuration, installs the bootloader and asks for a password.
 Disk erasure requires typing `ERASE /dev/<the-selected-disk>` exactly.
 The installer refuses mounted, removable/USB, read-only and active swap disks.
 Use an internal disk of at least 80 GiB; 100 GiB or more is recommended.
+The complete configuration needs at least 8 GiB RAM during installation;
+16 GiB is recommended. The current system closure is approximately 38 GiB
+before personal data and subsequent generations.
 
 UEFI installs use a 1 GiB FAT ESP and an ext4 root when erasure is selected.
 BIOS installs use GPT with a BIOS boot partition and GRUB. Existing-partition

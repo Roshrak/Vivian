@@ -7,6 +7,12 @@
   # must trust it explicitly; never allow every repository with safe.directory=*.
   programs.git.enable = true;
   programs.git.config.safe.directory = "/etc/nixos";
+  # First login may start the policy before Noctalia's IPC is ready. Retry
+  # only the small idempotent policy operation, without restarting desktops.
+  systemd.user.services.autosleep-policy = {
+    unitConfig = { StartLimitIntervalSec = "60s"; StartLimitBurst = 10; };
+    serviceConfig = { Restart = "on-failure"; RestartSec = "3s"; };
+  };
   hardware.cpu.intel.updateMicrocode = lib.mkIf (host.cpuVendor == "intel")
     (lib.mkDefault config.hardware.enableRedistributableFirmware);
   hardware.cpu.amd.updateMicrocode = lib.mkIf (host.cpuVendor == "amd")

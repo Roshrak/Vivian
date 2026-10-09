@@ -70,3 +70,20 @@ are intentionally preserved instead of replacing the architecture.
 The existing Git identity, browser flags and trusted-user policy are configuration
 parity choices, not new security promises. Shared user scripts may require private
 Minecraft instances or authenticated services before their real task can run.
+
+Fresh-host first-login repairs preserve intended behavior: mutable GTK profile
+settings, initial colors and available terminal/Qt palettes are included, rather
+than depending on unpublished files. The original laptop's source behavior is
+unchanged. The small autosleep policy retries briefly if Noctalia is still
+starting; it does not restart the compositor. Root rebuilds trust only
+`/etc/nixos` through the generated system Git configuration. Installer Nix caches
+use a private directory on the target disk, with trust scoped to `/mnt/etc/nixos`.
+
+The newly installed repository is a clean local snapshot plus its generated
+host and upstream provenance; it is not a blind checkout that overwrites future
+local host changes. Review upstream updates before integrating them. Native
+rebuilds use the generated hostname alias. Private credentials and personal
+application state remain excluded, even when a public helper refers to their
+expected runtime location. Original laptop-only recovery closures are an external
+machine-local dependency of `tonelico`, not an installer dependency of new hosts.
+The ISO launcher never selects `tonelico` for a different computer.
