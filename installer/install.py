@@ -14,6 +14,7 @@ import platform
 import re
 import shlex
 import shutil
+import signal
 import stat
 import subprocess
 import sys
@@ -40,6 +41,27 @@ def run(args, capture=False, env=None):
     p = subprocess.run(args, check=True, text=True, env=env,
                        stdout=subprocess.PIPE if capture else None)
     return p.stdout.strip() if capture else None
+
+
+def run_nix(args, capture=False, env=None):
+    """Retry one observed Nix signal crash, never formatting or activation."""
+    if args[0] != 'nix' or not any(action in args for action in ('eval', 'build')):
+        raise ValueError('Crash recovery is limited to Nix evaluation/build.')
+    try:
+        return run(args, capture, env)
+    except subprocess.CalledProcessError as exc:
+        if exc.returncode != -signal.SIGBUS:
+            raise
+        print('WARNING: Nix crashed with SIGBUS. Keeping all target state and retrying this evaluation/build once. The underlying Nix crash is not considered fixed.', file=sys.stderr, flush=True)
+        return run(args, capture, env)
+
+
+def protect_existing_os():
+    """Mounting is not permission to overwrite another installed OS."""
+    for marker in ('etc/os-release', 'etc/passwd', 'etc/shadow'):
+        p = TARGET / marker
+        if p.exists() or p.is_symlink():
+            raise ValueError('Existing operating-system root preserved. Select an empty root partition or resume a valid Vivian receipt; other OS partitions will not be overwritten.')
 
 
 def ask(prompt, default=None):
@@ -495,6 +517,8 @@ def main():
         else:
             raise ValueError('No installation selected.')
         mounts = validate_mounts(mode)
+        if not (TARGET / 'var/lib/vivian-installer/receipt.json').exists():
+            protect_existing_os()
         state_dir = regular(TARGET / 'var/lib/vivian-installer')
         if not state_dir.exists():
             state_dir.mkdir(parents=True, mode=0o700)
@@ -529,10 +553,10 @@ def main():
         environment = nix_environment(state_dir)
         # Evaluation can realize package-backed desktop/session probes (IFD).
         # These outputs must live on the target disk too, never the ISO's RAM store.
-        run(['nix', *NIX_FLAGS, 'eval', '--store', str(TARGET), '--eval-store', str(TARGET), '--no-write-lock-file', '--raw', ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel.drvPath'], env=environment)
+        run_nix(['nix', *NIX_FLAGS, 'eval', '--option', 'max-jobs', '1', '--option', 'cores', '2', '--store', str(TARGET), '--eval-store', str(TARGET), '--no-write-lock-file', '--raw', ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel.drvPath'], env=environment)
         if r['phase'] == 'prepared':
             # Build into the installed disk's store, not the ISO's RAM overlay.
-            built = run(['nix', *NIX_FLAGS, 'build', '--no-write-lock-file', '--no-link', '--print-out-paths', '--option', 'max-jobs', '1', '--option', 'cores', '2', '--store', str(TARGET), '--eval-store', str(TARGET),
+            built = run_nix(['nix', *NIX_FLAGS, 'build', '--no-write-lock-file', '--no-link', '--print-out-paths', '--option', 'max-jobs', '1', '--option', 'cores', '2', '--store', str(TARGET), '--eval-store', str(TARGET),
                          ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel'], True, env=environment)
             outputs = built.splitlines()
             if len(outputs) != 1 or not outputs[0].startswith('/nix/store/'):

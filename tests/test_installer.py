@@ -5,6 +5,8 @@ import json
 import os
 import pty
 import select
+import signal
+import subprocess
 import sys
 from pathlib import Path
 import stat
@@ -29,6 +31,40 @@ class InstallerSafety(unittest.TestCase):
         return dict(path='/dev/vda', type='disk', size=100 * 1024**3,
                     model='test only', serial='fixture', ro=False, rm=False,
                     tran=None, mountpoints=[], children=[], **extra)
+
+    def test_other_os_root_is_preserved(self):
+        root=self.root/'target'; (root/'etc').mkdir(parents=True)
+        (root/'etc/passwd').write_text('OTHER OS USER DATA')
+        with patch.object(installer,'TARGET',root):
+            with self.assertRaisesRegex(ValueError,'operating-system root preserved'):installer.protect_existing_os()
+        self.assertEqual((root/'etc/passwd').read_text(),'OTHER OS USER DATA')
+
+    def test_empty_prepartitioned_root_is_supported(self):
+        with patch.object(installer,'TARGET',self.root):installer.protect_existing_os()
+
+    def test_nix_signal_crash_retries_only_same_safe_command(self):
+        args=['nix','build','fixture'];failure=subprocess.CalledProcessError(-signal.SIGBUS,args)
+        with patch.object(installer,'run',side_effect=[failure,'/nix/store/result']) as commands:
+            self.assertEqual(installer.run_nix(args,True,{'HOME':'fixture'}),'/nix/store/result')
+            self.assertEqual(commands.call_args_list[0],commands.call_args_list[1])
+            self.assertEqual(commands.call_count,2)
+
+    def test_repeated_signal_crash_stops_after_one_retry(self):
+        args=['nix','eval','fixture'];failure=subprocess.CalledProcessError(-signal.SIGBUS,args)
+        with patch.object(installer,'run',side_effect=failure) as commands:
+            with self.assertRaises(subprocess.CalledProcessError):installer.run_nix(args)
+            self.assertEqual(commands.call_count,2)
+
+    def test_ordinary_build_failure_is_not_hidden_or_retried(self):
+        args=['nix','build','fixture']
+        with patch.object(installer,'run',side_effect=subprocess.CalledProcessError(1,args)) as commands:
+            with self.assertRaises(subprocess.CalledProcessError):installer.run_nix(args)
+            self.assertEqual(commands.call_count,1)
+
+    def test_crash_recovery_cannot_retry_deletion_or_activation(self):
+        with patch.object(installer,'run') as commands:
+            with self.assertRaises(ValueError):installer.run_nix(['nix','store','delete','fixture'])
+            commands.assert_not_called()
 
     def test_usb_never_erasable(self):
         d = self.node(); d['tran'] = 'usb'

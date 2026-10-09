@@ -15,6 +15,10 @@ connect to the internet, open a terminal, and paste:
 sudo nix --extra-experimental-features 'nix-command flakes' run github:Roshrak/Vivian#install
 ```
 
+Nix may ask whether to trust the two declared binary caches. These are the same
+pinned configuration's cache settings; accepting them is optional. Permanent
+trust is also optional. No custom tools or manual clone are needed on the ISO.
+
 The wizard selects a disk, asks whether to **use existing partitions** or
 **erase the entire selected disk**, generates fresh hardware configuration,
 asks for your hostname and username (default `aesc`), builds the entire system
@@ -31,6 +35,11 @@ BIOS installs use GPT with a BIOS boot partition and GRUB. Existing-partition
 mode never formats partitions; it requires a Linux root filesystem and, for
 UEFI, a FAT EFI System Partition. Other partitions remain intact in this mode.
 Existing `/etc/nixos` configuration is not silently overwritten.
+Existing-partition mode requires an empty intended root, or a valid receipt
+from this installer; it refuses another operating system's root. LUKS/device
+mapper, RAID and removable target disks are outside this wizard's supported
+storage scope. A shared ESP retains other vendors' EFI directories, but the
+selected bootloader and standard fallback loader are installed onto that ESP.
 
 **The installer never reboots automatically.** After success, reboot, remove
 the USB and choose a session at the login screen.

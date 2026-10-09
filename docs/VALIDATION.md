@@ -11,9 +11,10 @@ Completed evidence includes:
 
 - Full original `tonelico` build, flake validation, and comparison of its
   critical options and original system/Home Manager package names/priorities.
-- Thirty-two isolated installer safety tests, including real terminal I/O,
+- Thirty-eight isolated installer safety tests, including real terminal I/O,
   explicit erase confirmation, symlinks, stale/changed source, interrupted
-  source preparation and failure-safe resume.
+  source preparation, refusal to replace another OS root, failure-safe resume
+  and a bounded retry of the identical evaluation/build after a SIGBUS.
 - A complete guided installation from the official ISO; interrupted build
   resumed without reformatting. Kernel/initrd, EFI entry and fallback EFI loader
   were verified on the target disk.
@@ -36,9 +37,12 @@ The actual public GitHub command, a fresh installation of its final revision,
 and that installed guest's native rebuild are being tested separately.
 Do not treat earlier local-source installation as proof of GitHub bootstrapping.
 
-One Nix 2.34.8 build process crashed with SIGBUS; resuming the same installation
-succeeded. Its root cause remains unknown. The installer preserves completed
-phases and reports failures rather than silently claiming success.
+Two Nix 2.34.8 subprocesses crashed with SIGBUS during initial package fetching
+or evaluation. Target and RAM filesystem space were available, with no logged
+OOM/storage failure explaining the signal. The underlying cause remains unknown.
+The installer retries that exact evaluation/build once and stops if it recurs;
+ordinary build failures are never hidden or retried. Completed phases remain
+available for resume. This is recovery behavior, not a claim that Nix is repaired.
 
 ## Limits
 
