@@ -3,7 +3,7 @@
 ## Observed tests — October 9, 2026
 
 This is the full modular configuration, not a reduced VM recreation.
-The official NixOS Plasma 26.05 graphical ISO was used with QEMU/KVM, UEFI,
+The official NixOS 26.05 graphical ISO (GNOME session observed) was used with QEMU/KVM, UEFI,
 two virtual CPUs, 8 GiB RAM, a 110 GiB virtual disk and virtio graphics.
 ISO SHA-256: `8c39c59fb6a83cf5451e02934ccf06c7a9f62addf409a8bb9e02efbb2d994d0c`.
 

@@ -257,7 +257,7 @@
       "path": "docs/VALIDATION.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "041d74047f254e4304a6c898331f33528f54cb691191b60e61f4e73e3c10ca3e"
+      "sha256": "05323cafa70bbaa63f2929388215d2dddb0760ced8e4e1df5dedd16f47c35575"
     },
     {
       "path": "flake.lock",
