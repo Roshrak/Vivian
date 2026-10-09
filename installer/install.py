@@ -441,10 +441,12 @@ def main():
                  'boot_mode': mode, 'boot_disk': boot_disk, 'mounts': mounts, 'phase': 'prepared'}
             save_json(receipt_file, r)
         ref = str(TARGET / 'etc/nixos') + '#' + r['hostname']
-        run(['nix', *NIX_FLAGS, 'eval', '--no-write-lock-file', '--raw', ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel.drvPath'])
+        # Evaluation can realize package-backed desktop/session probes (IFD).
+        # These outputs must live on the target disk too, never the ISO's RAM store.
+        run(['nix', *NIX_FLAGS, 'eval', '--store', str(TARGET), '--eval-store', str(TARGET), '--no-write-lock-file', '--raw', ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel.drvPath'])
         if r['phase'] == 'prepared':
             # Build into the installed disk's store, not the ISO's RAM overlay.
-            built = run(['nix', *NIX_FLAGS, 'build', '--no-write-lock-file', '--no-link', '--print-out-paths', '--option', 'max-jobs', '1', '--option', 'cores', '2', '--store', str(TARGET),
+            built = run(['nix', *NIX_FLAGS, 'build', '--no-write-lock-file', '--no-link', '--print-out-paths', '--option', 'max-jobs', '1', '--option', 'cores', '2', '--store', str(TARGET), '--eval-store', str(TARGET),
                          ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel'], True)
             outputs = built.splitlines()
             if len(outputs) != 1 or not outputs[0].startswith('/nix/store/'):
