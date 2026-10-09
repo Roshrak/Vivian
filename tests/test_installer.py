@@ -43,6 +43,40 @@ class InstallerSafety(unittest.TestCase):
         with patch.object(Path, 'read_text', return_value='Filename Type Size Used Priority\n/dev/vda partition 1 0 0\n'):
             self.assertIn('swap', installer.unsafe_device(d))
 
+    def test_bios_without_stable_identity_is_refused_before_formatting(self):
+        with patch.object(installer, 'choose_disk', return_value=self.node()), patch.object(installer, 'device_identity', return_value={'rdev': 123}), patch.object(Path, 'glob', return_value=[]), patch.object(installer, 'run') as commands:
+            with self.assertRaisesRegex(ValueError, 'stable disk ID'): installer.prepare_disk('bios')
+            commands.assert_not_called()
+
+    def test_resume_before_receipt_derives_mounted_disk_without_formatting(self):
+        d = self.node(); d['children'] = [{'path': '/dev/vda2'}]
+        with patch.object(installer, 'inventory', return_value=[d]):
+            self.assertEqual(installer.mounted_boot_disk({'root': {'source': '/dev/vda2'}}, 'uefi'), '/dev/vda')
+
+    def test_unknown_mounted_disk_is_not_guessed(self):
+        with patch.object(installer, 'inventory', return_value=[self.node()]):
+            with self.assertRaisesRegex(ValueError, 'Cannot identify'): installer.mounted_boot_disk({'root': {'source': '/dev/unknown'}}, 'uefi')
+
+    def test_existing_partition_mode_never_formats(self):
+        with patch.object(installer, 'TARGET', self.root / 'mnt'), patch.object(installer, 'choose_disk', return_value=self.node()), patch.object(installer, 'device_identity', return_value={'rdev': 123}), patch.object(installer, 'ask', return_value='M'), patch.object(installer, 'choose_partition', side_effect=[{'path': '/dev/vda2'}, {'path': '/dev/vda1'}]), patch.object(installer, 'revalidate'), patch.object(installer, 'run') as commands:
+            installer.prepare_disk('uefi')
+            self.assertEqual([call.args[0][0] for call in commands.call_args_list], ['mount', 'mount'])
+
+    def test_nix_home_uses_disk_and_trusts_only_installed_checkout(self):
+        env = installer.nix_environment(self.root)
+        home = Path(env['HOME'])
+        self.assertEqual(home.parent, self.root)
+        self.assertEqual(Path(env['XDG_CACHE_HOME']).parent, home)
+        self.assertEqual((home / '.gitconfig').read_text(), '[safe]\n\tdirectory = /mnt/etc/nixos\n')
+        self.assertEqual(stat.S_IMODE(home.stat().st_mode), 0o700)
+        self.assertEqual(installer.nix_environment(self.root)['HOME'], env['HOME'])
+
+    def test_changed_git_trust_file_is_preserved(self):
+        env = installer.nix_environment(self.root); config = Path(env['HOME']) / '.gitconfig'
+        config.write_text('[safe]\n\tdirectory = /other/user/work\n')
+        with self.assertRaisesRegex(ValueError, 'changed'): installer.nix_environment(self.root)
+        self.assertIn('/other/user/work', config.read_text())
+
     def test_regular_rejects_link_ancestor(self):
         (self.root / 'linked').symlink_to(self.root, target_is_directory=True)
         with self.assertRaises(ValueError): installer.regular(self.root / 'linked' / 'child')
@@ -130,6 +164,46 @@ class InstallerSafety(unittest.TestCase):
         with patch.object(installer, 'TARGET', target):
             with self.assertRaisesRegex(ValueError, 'preserved'): installer.prepare_source(self.root, 'rev', 'uefi', '/dev/vda')
         self.assertEqual((p / 'user-work').read_text(), 'KEEP')
+
+    def test_reserved_service_identity_stops_before_source_changes(self):
+        with patch.object(installer, 'TARGET', self.root / 'target'), patch.object(installer, 'ask', side_effect=['fresh-host', 'nixbld1']), patch.object(installer, 'run') as commands:
+            with self.assertRaisesRegex(ValueError, 'reserved'): installer.prepare_source(self.root, 'rev', 'uefi', '/dev/vda')
+            commands.assert_not_called()
+        self.assertFalse((self.root / 'target/etc/nixos').exists())
+
+    def staged(self):
+        target = self.root / 'target'; staged = target / 'etc/.vivian-source-fixture/tree'
+        staged.mkdir(parents=True, mode=0o755); staged.parent.chmod(0o700)
+        (staged / 'flake.nix').write_text('fixture source')
+        return target, staged, {'phase': 'prepared', 'staging_source': str(staged),
+                                'installed_source_sha256': installer.digest(staged)[0]}
+
+    def test_checkpointed_source_recovers_interrupted_rename(self):
+        target, staged, receipt = self.staged()
+        with patch.object(installer, 'TARGET', target): installer.recover_prepared_source(receipt)
+        self.assertFalse(staged.exists())
+        self.assertEqual((target / 'etc/nixos/flake.nix').read_text(), 'fixture source')
+
+    def test_changed_pending_source_is_preserved(self):
+        target, staged, receipt = self.staged(); (staged / 'user-work').write_text('KEEP')
+        with patch.object(installer, 'TARGET', target):
+            with self.assertRaisesRegex(ValueError, 'changed'): installer.recover_prepared_source(receipt)
+        self.assertEqual((staged / 'user-work').read_text(), 'KEEP')
+        self.assertFalse((target / 'etc/nixos').exists())
+
+    def test_pending_receipt_cannot_move_other_directory(self):
+        target, staged, receipt = self.staged(); receipt['staging_source'] = str(self.root)
+        with patch.object(installer, 'TARGET', target):
+            with self.assertRaisesRegex(ValueError, 'Invalid'): installer.recover_prepared_source(receipt)
+        self.assertTrue(staged.exists())
+
+    def test_existing_changed_source_is_never_replaced_by_checkpoint(self):
+        target, staged, receipt = self.staged(); current = target / 'etc/nixos'; current.mkdir()
+        (current / 'user-work').write_text('KEEP')
+        with patch.object(installer, 'TARGET', target):
+            with self.assertRaisesRegex(ValueError, 'changed'): installer.recover_prepared_source(receipt)
+        self.assertEqual((current / 'user-work').read_text(), 'KEEP')
+        self.assertTrue(staged.exists())
 
     def test_prompt_works_on_real_nonseekable_controlling_terminal(self):
         pid, fd = pty.fork()

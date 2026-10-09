@@ -99,12 +99,19 @@
       nixosConfigurations =
         let
           configurations = builtins.listToAttrs (map mkHost hostKeys);
+          hostnames = map (key: (import (hostRoot + "/${key}/host.nix")).hostName) hostKeys;
           hostnameAliases = builtins.listToAttrs (
             map (
               key: lib.nameValuePair (import (hostRoot + "/${key}/host.nix")).hostName configurations.${key}
             ) hostKeys
           );
         in
+        assert lib.assertMsg (builtins.length (lib.unique hostnames) == builtins.length hostnames)
+          "Vivian hostnames must be unique across hosts/.";
+        assert lib.assertMsg (lib.all (key:
+          let name = (import (hostRoot + "/${key}/host.nix")).hostName;
+          in name == key || !(builtins.elem name hostKeys)) hostKeys)
+          "A Vivian hostname alias must not shadow another host directory.";
         configurations // hostnameAliases;
     };
 

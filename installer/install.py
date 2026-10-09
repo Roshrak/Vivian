@@ -24,16 +24,20 @@ from pathlib import Path
 MIN_DISK = 80 * 1024**3
 TARGET = Path('/mnt')
 ROOT_TYPES = {'ext4', 'btrfs', 'xfs'}
+RESERVED_USERS = {'root', 'nixbld', 'greeter', 'nobody', 'daemon', 'bin', 'dbus',
+                  'messagebus', 'avahi', 'rtkit', 'polkituser', 'gdm', 'sddm',
+                  'lightdm', 'sshd', 'libvirt-qemu', 'qemu-libvirtd', 'chrony',
+                  'ntp', 'nscd', 'nm-openvpn', 'systemd-network', 'systemd-resolve'}
 EFI_TYPE = 'c12a7328-f81f-11d2-ba4b-00a0c93ec93b'
 BIOS_TYPE = '21686148-6449-6e6f-744e-656564454649'
 NIX_FLAGS = ['--extra-experimental-features', 'nix-command flakes',
              '--accept-flake-config']
 
 
-def run(args, capture=False):
+def run(args, capture=False, env=None):
     args = list(map(str, args))
     print('[RUN] ' + shlex.join(args), flush=True)
-    p = subprocess.run(args, check=True, text=True,
+    p = subprocess.run(args, check=True, text=True, env=env,
                        stdout=subprocess.PIPE if capture else None)
     return p.stdout.strip() if capture else None
 
@@ -101,6 +105,25 @@ def revalidate(expected, allowed_mounts=()):
     reason = unsafe_device(matches[0], allowed_mounts)
     if reason:
         raise ValueError('Unsafe target: ' + reason)
+
+
+def stable_boot_disk(disk, mode):
+    if mode == 'uefi':
+        return disk['path']  # EFI installation uses the generated ESP UUID.
+    identities = Path('/dev/disk/by-id')
+    for p in sorted(identities.glob('*')):
+        if '-part' not in p.name and os.path.realpath(p) == os.path.realpath(disk['path']):
+            return str(p)
+    raise ValueError('BIOS installation requires a stable disk ID. No disk was changed. Use UEFI or a disk exposing a serial/WWN.')
+
+
+def mounted_boot_disk(mounts, mode):
+    source = mounts['root']['source'].split('[', 1)[0]
+    disks = [d for d in inventory() if d['type'] == 'disk' and any(
+        os.path.realpath(p['path']) == os.path.realpath(source) for p in flatten([d]))]
+    if len(disks) != 1:
+        raise ValueError('Cannot identify mounted root disk safely; no disk was changed.')
+    return stable_boot_disk(disks[0], mode)
 
 
 def choose_disk():
@@ -176,6 +199,7 @@ def choose_partition(disk, kind):
 def prepare_disk(mode):
     disk = choose_disk()
     expected = device_identity(disk)
+    boot_disk = stable_boot_disk(disk, mode)
     print('E = erase the entire selected disk; M = use existing partitions without formatting.')
     action = ask('Storage method', 'M').upper()
     regular(TARGET).mkdir(exist_ok=True)
@@ -232,7 +256,7 @@ def prepare_disk(mode):
     if mode == 'uefi':
         regular(TARGET / 'boot').mkdir(exist_ok=True)
         run(['mount', bootdev, TARGET / 'boot'])
-    return disk['path']
+    return boot_disk
 
 
 def digest(source):
@@ -271,6 +295,23 @@ def save_json(path, data):
             os.unlink(tmp)
 
 
+def nix_environment(state_dir):
+    """Keep caches on disk and grant root scoped trust for this one checkout."""
+    home = regular(state_dir / 'nix-home')
+    home.mkdir(mode=0o700, exist_ok=True)
+    if home.stat().st_uid != os.geteuid() or home.stat().st_mode & 0o077:
+        raise ValueError('Private Nix home must be owned by the installer only.')
+    git_config = regular(home / '.gitconfig')
+    text = '[safe]\n\tdirectory = /mnt/etc/nixos\n'
+    if not git_config.exists():
+        fd = os.open(git_config, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+        with os.fdopen(fd, 'w') as f:
+            f.write(text)
+    elif git_config.read_text() != text:
+        raise ValueError('Installer Git trust configuration changed; preserved.')
+    return dict(os.environ, HOME=str(home), XDG_CACHE_HOME=str(home / '.cache'))
+
+
 def detect_hardware():
     cpu = Path('/proc/cpuinfo').read_text()
     cpu_vendor = 'intel' if 'GenuineIntel' in cpu else 'amd' if 'AuthenticAMD' in cpu else 'other'
@@ -287,7 +328,27 @@ def detect_hardware():
     return cpu_vendor, answer
 
 
-def prepare_source(source, revision, boot_mode, boot_disk, vm_key=None):
+def recover_prepared_source(receipt):
+    """Finish a checkpointed source rename; never adopt unknown existing work."""
+    target = regular(TARGET / 'etc/nixos')
+    if target.exists():
+        if digest(target)[0] != receipt['installed_source_sha256']:
+            raise ValueError('Local source changed after preparation; preserved without overwrite.')
+        return
+    pending = receipt.get('staging_source')
+    if receipt.get('phase') != 'prepared' or not isinstance(pending, str):
+        raise ValueError('Prepared source missing; target preserved for diagnosis.')
+    staged = regular(Path(pending))
+    if staged.parent.parent != TARGET / 'etc' or not staged.parent.name.startswith('.vivian-source-') or staged.name != 'tree':
+        raise ValueError('Invalid staged-source receipt path; nothing moved.')
+    if any(p.stat().st_uid != os.geteuid() or p.stat().st_mode & 0o022 for p in (staged, staged.parent)):
+        raise ValueError('Staged source ownership/permissions changed; preserved.')
+    if digest(staged)[0] != receipt['installed_source_sha256']:
+        raise ValueError('Staged source changed; preserved without activation.')
+    os.rename(staged, target)
+
+
+def prepare_source(source, revision, boot_mode, boot_disk, vm_key=None, checkpoint=None):
     target_source = regular(TARGET / 'etc/nixos')
     if target_source.exists():
         raise ValueError('Existing /mnt/etc/nixos preserved. Resume using its valid receipt, or choose an empty target.')
@@ -295,14 +356,20 @@ def prepare_source(source, revision, boot_mode, boot_disk, vm_key=None):
     username = ask('Primary username', 'aesc')
     if not hostname or not re.fullmatch(r'[a-z][a-z0-9-]{0,61}[a-z0-9]|[a-z]', hostname):
         raise ValueError('Use a lowercase hostname of at most 63 characters.')
-    if hostname in {'tonelico', 'tonelico-nix', 'template'} or (source / 'hosts' / hostname).exists():
+    existing_names = {'tonelico', 'tonelico-nix', 'template'}
+    for metadata in (source / 'hosts').glob('*/host.nix'):
+        match = re.search(r'\bhostName\s*=\s*"([a-z0-9-]+)"\s*;', metadata.read_text())
+        if match:
+            existing_names.add(match.group(1))
+    if hostname in existing_names or (source / 'hosts' / hostname).exists():
         raise ValueError('Hostname collides with an existing host; its files were preserved.')
-    if not username or not re.fullmatch(r'[a-z_][a-z0-9_-]{0,30}', username) or username in {'root', 'nixbld', 'greeter', 'nobody'}:
+    if not username or not re.fullmatch(r'[a-z_][a-z0-9_-]{0,30}', username) or username in RESERVED_USERS or username.startswith(('nixbld', 'systemd-')):
         raise ValueError('Invalid or reserved username.')
     cpu, gpu = detect_hardware()
     regular(target_source.parent).mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix='.vivian-source-', dir=target_source.parent))
     tree = staging / 'tree'
+    checkpointed = False
     try:
         shutil.copytree(source, tree, ignore=shutil.ignore_patterns('.git', '__pycache__'))
         for p in [tree, *tree.rglob('*')]:
@@ -346,10 +413,17 @@ def prepare_source(source, revision, boot_mode, boot_disk, vm_key=None):
         # This is a brand-new generated checkout; no user index exists to overwrite.
         run(['git', '-C', tree, '-c', 'user.name=Vivian installer', '-c', 'user.email=installer@localhost', 'commit', '-m', 'Install Vivian ' + revision + ' with generated host ' + hostname])
         run(['git', '-C', tree, 'remote', 'add', 'origin', 'https://github.com/Roshrak/Vivian.git'])
+        prepared_hash = digest(tree)[0]
+        if checkpoint is not None:
+            checkpoint(hostname, username, prepared_hash, tree)
+            checkpointed = True
         os.rename(tree, target_source)
-        return hostname, username, digest(target_source)[0]
+        return hostname, username, prepared_hash
     finally:
-        shutil.rmtree(staging)  # exclusively this invocation's private staging tree
+        # Preserve a checkpointed tree if its atomic rename was interrupted.
+        # On rerun the receipt authenticates its exact path and content.
+        if not checkpointed or not tree.exists():
+            shutil.rmtree(staging)  # exclusively this invocation's private staging tree
 
 
 def target_payload(candidate, name):
@@ -433,24 +507,33 @@ def main():
                 raise ValueError('Resume must use original revision: sudo nix --extra-experimental-features "nix-command flakes" run github:Roshrak/Vivian/' + r['revision'] + '#install')
             if r['mounts']['root']['maj:min'] != mounts['root']['maj:min'] or r['mounts']['root']['source'] != mounts['root']['source'] or r['boot_mode'] != mode or (r['mounts']['boot'] or {}).get('source') != (mounts['boot'] or {}).get('source'):
                 raise ValueError('Mounted target differs from receipt; existing installation preserved.')
-            if digest(TARGET / 'etc/nixos')[0] != r['installed_source_sha256']:
-                raise ValueError('Local source changed after preparation; preserved without overwrite.')
+            recover_prepared_source(r)
         else:
             if resume == 'R':
-                raise ValueError('No valid receipt. Use N and existing partitions (M); never re-erase to recover a build failure.')
-            hostname, username, installed_hash = prepare_source(source, args.revision, mode, boot_disk, args.vm_test_key)
+                # A recoverable failure before source preparation may leave
+                # valid mounts but no receipt. Repeat only preparation; never
+                # invoke partitioning or formatting from this resume path.
+                boot_disk = mounted_boot_disk(mounts, mode)
+            def checkpoint(hostname, username, installed_hash, tree):
+                save_json(receipt_file, {
+                    'revision': args.revision, 'source_sha256': source_hash,
+                    'installed_source_sha256': installed_hash, 'hostname': hostname, 'username': username,
+                    'boot_mode': mode, 'boot_disk': boot_disk, 'mounts': mounts,
+                    'phase': 'prepared', 'staging_source': str(tree)})
+            hostname, username, installed_hash = prepare_source(source, args.revision, mode, boot_disk, args.vm_test_key, checkpoint)
             r = {'revision': args.revision, 'source_sha256': source_hash,
                  'installed_source_sha256': installed_hash, 'hostname': hostname, 'username': username,
                  'boot_mode': mode, 'boot_disk': boot_disk, 'mounts': mounts, 'phase': 'prepared'}
             save_json(receipt_file, r)
         ref = str(TARGET / 'etc/nixos') + '#' + r['hostname']
+        environment = nix_environment(state_dir)
         # Evaluation can realize package-backed desktop/session probes (IFD).
         # These outputs must live on the target disk too, never the ISO's RAM store.
-        run(['nix', *NIX_FLAGS, 'eval', '--store', str(TARGET), '--eval-store', str(TARGET), '--no-write-lock-file', '--raw', ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel.drvPath'])
+        run(['nix', *NIX_FLAGS, 'eval', '--store', str(TARGET), '--eval-store', str(TARGET), '--no-write-lock-file', '--raw', ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel.drvPath'], env=environment)
         if r['phase'] == 'prepared':
             # Build into the installed disk's store, not the ISO's RAM overlay.
             built = run(['nix', *NIX_FLAGS, 'build', '--no-write-lock-file', '--no-link', '--print-out-paths', '--option', 'max-jobs', '1', '--option', 'cores', '2', '--store', str(TARGET), '--eval-store', str(TARGET),
-                         ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel'], True)
+                         ref.replace('#', '#nixosConfigurations.') + '.config.system.build.toplevel'], True, env=environment)
             outputs = built.splitlines()
             if len(outputs) != 1 or not outputs[0].startswith('/nix/store/'):
                 raise ValueError('Expected exactly one system output.')
@@ -484,7 +567,7 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except (ValueError, OSError, subprocess.CalledProcessError, KeyboardInterrupt) as e:
+    except (ValueError, KeyError, TypeError, OSError, subprocess.CalledProcessError, KeyboardInterrupt) as e:
         print('\nINSTALLATION STOPPED SAFELY: ' + str(e), file=sys.stderr)
         print('Existing data and completed phases are retained. A failed build does NOT require formatting again.', file=sys.stderr)
         sys.exit(1)

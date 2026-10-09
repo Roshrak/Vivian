@@ -20,10 +20,14 @@ let
     value = {
       executable = true;
       text = "#!${python}/bin/python3\n" + lib.removePrefix "#!/usr/bin/env python3\n"
-        (builtins.readFile (../files/bin + "/${name}"));
+        (lib.replaceStrings [ "/home/aesc" ] [ config.home.homeDirectory ]
+          (builtins.readFile (../files/bin + "/${name}")));
     };
   };
 in lib.mkIf (host.portable or false) {
+  # The music helper's structured browser path has a Sway/wtype fallback.
+  # Its original imperative executable must be a declared dependency here.
+  home.packages = [ pkgs.wtype ];
   home.file = lib.listToAttrs (map helper [ "ytmusic_control.py" "gpu_market_search.py" "clean-system.py" ]) // {
     ".local/bin/uinput_type".source = "${uinput}/bin/uinput_type";
     ".hermes/scripts/clean-system.py".text = builtins.readFile ../files/bin/clean-system.py;
