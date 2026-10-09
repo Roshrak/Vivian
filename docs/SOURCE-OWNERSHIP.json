@@ -1,1070 +1,1252 @@
 {
-  "scope": "Every versioned public source/resource plus unavoidable external inputs. Values and private credentials are not included. Mixed module boundaries are explained in PORTABILITY.md.",
+  "scope": "All versioned public source/resources; setting-level mixed ownership and deliberate differences are in PORTABILITY.md. No secret values are recorded.",
   "files": [
     {
       "path": ".gitignore",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "709e4130f487297f65a9c0b2e178aa8d6e1cd80c8a3498f25726fbfcce5ebcb0"
     },
     {
       "path": "README.md",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "69a082c1bc1e5d7cf23620a3b6de2fa22b40688e7a9619ef9f9b2d3d62e6b24a"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "afc5119154e8adccfabc9da7632da8dd77929e99f3d2c2d63567379fd329a804"
     },
     {
       "path": "archive/claude-code.nix",
       "classification": "OPTIONAL",
-      "reason": "Preserved inactive historical source; not added to fresh-host imports.",
+      "reason": "Inactive historical source preserved; not imported by the portable host.",
       "sha256": "4ec409f6eb52e270ffbb403b7b14fad39b74b7c0341d33a63ee54182be4b00ba"
     },
     {
       "path": "archive/desktop/awesome.nix",
       "classification": "OPTIONAL",
-      "reason": "Preserved inactive historical source; not added to fresh-host imports.",
+      "reason": "Inactive historical source preserved; not imported by the portable host.",
       "sha256": "1b52d17fdc79d401afa7abd3b0a79f54149ed34771abacc602e6c49c6ab02fdd"
     },
     {
       "path": "archive/desktop/cinnamon.nix",
       "classification": "OPTIONAL",
-      "reason": "Preserved inactive historical source; not added to fresh-host imports.",
+      "reason": "Inactive historical source preserved; not imported by the portable host.",
       "sha256": "a786145e641c6f5987ca810c2105335411daed1c63c8771de14fb0160eb02179"
     },
     {
       "path": "archive/desktop/lxqt.nix",
       "classification": "OPTIONAL",
-      "reason": "Preserved inactive historical source; not added to fresh-host imports.",
+      "reason": "Inactive historical source preserved; not imported by the portable host.",
       "sha256": "7128a4506657e0c6cd04f25ce2bd7eb88662ec2f187ee5d2f24bbb86c3d288d6"
     },
     {
       "path": "archive/desktop/mate.nix",
       "classification": "OPTIONAL",
-      "reason": "Preserved inactive historical source; not added to fresh-host imports.",
+      "reason": "Inactive historical source preserved; not imported by the portable host.",
       "sha256": "1638e47118f4855775a7ab9152fc28521846dd7a730a51ed306ba324b7082025"
     },
     {
       "path": "archive/llm-agents.nix",
       "classification": "OPTIONAL",
-      "reason": "Preserved inactive historical source; not added to fresh-host imports.",
+      "reason": "Inactive historical source preserved; not imported by the portable host.",
       "sha256": "d1d87f8e9b7c20d1e1686f98b5d9ac3a4ddafaa03de7a20daaf8e8d8b65f5da6"
     },
     {
       "path": "assets/wallpapers/120523661_p0.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "17cc9a18a8bfd820e4be3bce3ffe39928b0b7c4187f39a53709aecdb04d1e1ba"
     },
     {
       "path": "assets/wallpapers/137155645_p0.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "c43cfd40deeebe96e786a30dbc26fefd9c6402f84f42b4255d3197c130825589"
     },
     {
       "path": "assets/wallpapers/Vocaloid-Hatsune-Miku-blue-blue-hair-fan-art-landscape-1499037-wallhere.com.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "762482508242e8349d2f930fa43f98997a5bf334075247df7b829849cb0d971e"
     },
     {
       "path": "assets/wallpapers/__morgan_le_fay_and_aesc_fate_and_1_more_drawn_by_antinese__70c1f8a98bb2390d224d09920b6242d0.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6aa518db7c3cb1908fbec1bba9aac0927a3fe56ea9bf62dc3bac0538e9f17e54"
     },
     {
       "path": "assets/wallpapers/__morgan_le_fay_and_aesc_fate_and_1_more_drawn_by_mento__f67538d98eaf6f373f3f6e0eb1ba8d49.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "b065b288f9b60002d407d1a9f0113602d456b0dbc5e1c682fee1833392075da3"
     },
     {
       "path": "assets/wallpapers/__morgan_le_fay_fate_and_1_more_drawn_by_mochi_upamo__5a0064b23658cf009024bdb8bb13c707.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "bfa66a6fc54d67c6148912bb907f19b6a1acfcc93d7605c00ac9311f12bd3686"
     },
     {
       "path": "assets/wallpapers/__morgan_le_fay_fate_and_1_more_drawn_by_reluvy__617c9c2c2600b9f4c49693f239d75f10.png",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "81c578e85c9f055339a44710cab010c52c1096d4930ade1d48306bc2dec8c994"
     },
     {
       "path": "assets/wallpapers/ashes_ash_firewood_130924_1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "33e462c88eef647e09a55ab7dc341463b7b4a311191c08c79764678f64c8c903"
     },
     {
       "path": "assets/wallpapers/flower_sunflower_artificial_119551_1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1e1640946c244a86a25a5c6247375a235b30a536fa2721a7a3daa5f75353b202"
     },
     {
       "path": "assets/wallpapers/hatsune-miku-mclaren-gtr-and-the-fashionable-driver-27-1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d0cf866590c7bc13c136e60ffe60683ca8aaa09242f8e3d43caf985a0453d729"
     },
     {
       "path": "assets/wallpapers/hatsune-miku-twin-ponytails-jl-1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "bad2860f8c7f61cbfb927715d62aa0af0cc9f5a6466c6fe4c315cd72f98e8f08"
     },
     {
       "path": "assets/wallpapers/nanallynte.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "c14c4e0b79025167f996756aa4ab5767aeef42ee9241cad672ae1b4f32479ba4"
     },
     {
       "path": "assets/wallpapers/nix.png",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1704e2915745e8f80a41bb124ad3024607362fe755a5cfed951d552e872477d1"
     },
     {
       "path": "assets/wallpapers/origami_plane_art_128345_1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "acabc93aefae612f5985958a56a29538fb9b45f0820eb995cdc7b57dedb87317"
     },
     {
       "path": "assets/wallpapers/panes.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e505990c2575d1c06a464a506a6ad32c4d8ce81386ea782b4e2d744c209a10b6"
     },
     {
       "path": "assets/wallpapers/pexels-irina-semenchik-257064265-17583073.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "ba0c38b53344c8fb9cf4792d74d2e8a1403334925f0471fa7d2b6798c22e92a4"
     },
     {
       "path": "assets/wallpapers/pexels-lauripoldre-24963115.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "f5feae9261bade48b1f44566b0cc811f4f055c0a2ad305e4e11e4cbc4b2d4dc3"
     },
     {
       "path": "assets/wallpapers/rose_flower_white_143143_1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "482ffedc9f84241b9ec33c2a1898a55042dcaaf07b29b05501e58349199eb315"
     },
     {
       "path": "assets/wallpapers/snowy-map.png",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "0a09d6b93cb01e912ea0ab7f6e01b98fa36d32912fb8e8870a7d3378d6bb2e7c"
     },
     {
       "path": "assets/wallpapers/stairs_dark_bw_126426_1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d289ac9c411c6e6a4b9baf6995c790a80275cb4e15d2b2d37a42a03819f88502"
     },
     {
       "path": "assets/wallpapers/swirls.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "9f149d415b78da7667679e34b2fdcc9b2f31f1320115d7bc6988b46d4ec4dd6a"
     },
     {
       "path": "assets/wallpapers/swirly-painting.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "cfd91fb46ff6133debfedd72e219a2730776da01753844ef59d80b1d5757bb5a"
     },
     {
       "path": "assets/wallpapers/tank.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "b78093dc912a09ed8634d0d05b273267796061ed2c6ddc37a155fff38b726c19"
     },
     {
       "path": "assets/wallpapers/tree-stump.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "9d4e9e24787ac3c76208cc3956c14ac7724db0d58738eca9ebcd42efb5166151"
     },
     {
       "path": "assets/wallpapers/tree.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "7bc740e5d960a030e3ede51012ff20a3a0da1e469eab0a7282d53ac2200609c9"
     },
     {
       "path": "assets/wallpapers/vocaloid-hatsune-miku-anime-girl-3d-1920x1200.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "2a686793258534c9cf27042458ca33770e7e64e58036d815b1cae1b4e5c26a13"
     },
     {
       "path": "assets/wallpapers/wallhaven-5ykdq8.png",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "3dc9609dcc6ea0e9dff5ea745a94e7e0dcec745a1357e9b0d45a7dca2a43a9ca"
     },
     {
       "path": "assets/wallpapers/wallhaven-ogylom.png",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "31326536bee628c2312020f9d3bdb5a7183c6c4461c9f5de5a838e983646bb8a"
     },
     {
       "path": "assets/wallpapers/wallpaperflare.com_wallpaper.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6a4aafffd87e0940b8c4abb1ebf1dd840995267b80347bbd64d038c200128f17"
     },
     {
       "path": "assets/wallpapers/wp16058089-cartoon-miku-wallpapers.jpg",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "2eef921da94d67accf0a3e2efdd2fc1dc74685c79749a9a1f94f2cebe03e0745"
     },
     {
       "path": "comic-mono.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "43018ef6998b26663eabd5b09550f3b3328f783d1357e92a89b6cda6e7e4682b"
     },
     {
       "path": "configuration.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "fe145d2890c1790273debbcd089c068b603caa35f4308948df391081c820c928"
     },
     {
       "path": "docs/PORTABILITY.md",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "9a6276744531b486ea2689e2a4536faecced4f531d1481eb001433a8c5eb82ab"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "8645567364105aca110f01811997d21cdd9a68e39588398751e5bc5a30d1e514"
+    },
+    {
+      "path": "docs/SOURCE-OWNERSHIP.json",
+      "classification": "SHARED",
+      "reason": "This self-describing manifest excludes its own hash to avoid a circular digest.",
+      "sha256": null
     },
     {
       "path": "docs/VALIDATION.md",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "dd5984be6afefd3f117ccf4c88d4ec3a88561bbdc9ea943a8f86aa3c46938dc4"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "041d74047f254e4304a6c898331f33528f54cb691191b60e61f4e73e3c10ca3e"
     },
     {
       "path": "flake.lock",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "546e4e99659d85301a0b5088b1b3d3d6c4bcb878b8b661868fabe5a09b4371e1"
     },
     {
       "path": "flake.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "32c9246380f627d55749167e240fd0052298726e524170cb567901c544be4d64"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "00baa53445903a6418472cc51aaa8c3b4413a8aa25eb17fbf46dc2fec1e01745"
     },
     {
       "path": "fonts/comic-mono/ComicMono-Bold.ttf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "2396da69ddc7f5212caa0ede627fb2fbb2319a15cc6877249e109e1fd7e60e7e"
     },
     {
       "path": "fonts/comic-mono/ComicMono.ttf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "3bc1425e922a16abf0ec767effe4d0268439b4c0dce98432e07d15f5dad57196"
     },
     {
       "path": "hardware-configuration.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "9b14317f48b524616b132429bd63ec06639a8a18e44ab0de3c72eacfa80a2ee2"
     },
     {
       "path": "home-manager.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "a9310fc5274e173d2eb18ac3f32bd7de8db141faaac19e67d953cbdfe4ad662a"
     },
     {
       "path": "home.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6936f002eaa5ce53589daa58ff16de7132e9b5d50b4dec6854fddc52ba9cd3cb"
     },
     {
       "path": "home/desktop/configuration.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "00cf1ad0b4743ea1ed85bd94510f21b838ba3c05bdb8a1b70fafcb7de402c5e7"
     },
     {
       "path": "home/desktop/gnome.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "dbf50b22cb4ec542fcd563054358665507ebfe5d573fafdb380ca05b1e68fb10"
     },
     {
       "path": "home/desktop/portable-seeds.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "c49c9530ac9bd06dbf6429ed3194fbe0f2bf83758843bb160828ec4a37b004ec"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "2511aa4b400300af89071ca0608f4bf0f3cc0fea03b1472f7c837d3b4c033306"
     },
     {
       "path": "home/files/bin/agy_bridge.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "98e42a39bc29aba43aba5e2aa18db38b4252e13be1e774fba2c52c78f289ca8c"
     },
     {
       "path": "home/files/bin/apply-theme-profile",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "706c35051f32187e56f71ee1addd657c3570bd133fe440e6fe96e3c47935cb0f"
     },
     {
       "path": "home/files/bin/clean-stray-sessions",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "7d07282149f7569071df46922ab461935a43fdcfb4678e78c12fcbaca76f6a73"
     },
     {
       "path": "home/files/bin/clean-system.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "cc8ac2aca35b7e33fd651fd31ede25a6fa3e23077ef7c181ea9750961e46e631"
     },
     {
       "path": "home/files/bin/gpu_market_search.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "ad7d49eea08279314e21e857e26004dcdab0eb84e3c31737d1cd6a25effcd55d"
     },
     {
       "path": "home/files/bin/hypr-active-window-screenshot",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e80d4ff3cc159b7a349c6c7ecb4150258f97eeccbcffb2b9347f4a64806bdf1f"
     },
     {
       "path": "home/files/bin/hypr-noctalia-notification-owner",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e43c7e7ca5b8ec9363dfa0fb616e3bfe497c8ddc60669f8de0e3a9669e52c5cc"
     },
     {
       "path": "home/files/bin/hypr-session-ready",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "5f3b16475cbd86a8ef1ccb617289472c366efda04edcc5e6edc4bcd0b9dd7589"
     },
     {
       "path": "home/files/bin/mango-animation",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1adc7c47648f872003d04194efb3792f8cb08e3a0046606783a43668f16f7db8"
     },
     {
       "path": "home/files/bin/mc_chat_responder.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1f895684cd130b1e6b0b285eb29e82dae6003e4d49b0c45b5d808a2966678d1b"
     },
     {
       "path": "home/files/bin/noctalia-greeter-sync-smart",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "553bbf4e32be8f1c6b54762dcc5ec78c9018f6dcbfc84e379c8e5b7dd3d10ebe"
     },
     {
       "path": "home/files/bin/obs-fix-recording-paths",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "588f762b4bd7bbc5de4c605303e5f38f3fc334482cdf5b32844faae420652e78"
     },
     {
       "path": "home/files/bin/save-theme-profile",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6bf8d01f9c4a2c59efa763b3092c8bfe8dbee990a9b03af3bf344a0746c5327f"
     },
     {
       "path": "home/files/bin/sync-active-theme",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "976fa6160c1264cd9a60e46f0f31326e0e130da24840e8d34c27e99804fd7706"
     },
     {
       "path": "home/files/bin/uinput_type.c",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6a25976a88e102aede2374647ebe617ded452387707d4060527df8081f41c1d2"
     },
     {
       "path": "home/files/bin/ytmusic_control.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "9b0e228ce06603e06cb6ec44ed5f86fa8a0134e6b3f16d02963a10668e1495a0"
     },
     {
       "path": "home/files/config/fastfetch/config.jsonc",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "0bbc9c3fd76329fcd306b6a80f996c420edcd35acbf05f184de005ed99255fe9"
     },
     {
       "path": "home/files/config/kitty/common.conf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "ebaf8e24fc7af97a35a49b1739054a5dc442fb4c48d43ad9bc130c85c60e617d"
     },
     {
       "path": "home/files/config/kitty/default-theme.conf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "8390593d8b6bbdacdb04adb5651f1e63e2fff5cc529e1367c0ce7976f2fd6988"
     },
     {
       "path": "home/files/config/kitty/kitty.conf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "8ec5286d5411936b8c0e18e024beda071f93013d0e91b42d8a2214c1b4670db2"
     },
     {
       "path": "home/files/config/kitty/tonelico-comic-mono.conf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "095da8d5ee1bcec68b4722ad21e80f28c2feb77028217a389e231e61c8235f6e"
     },
     {
       "path": "home/files/config/mango/config.conf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1956e77ab7f41419c0f0a72ff855bacea74421819000622c5b12daf4db23df68"
     },
     {
       "path": "home/files/config/mango/monitor-layout.conf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "64b79b00fe1e02dabe3ddb271c886f69b04d322dd4f2d518d94a808c7935ff05"
     },
     {
       "path": "home/files/config/mango/noctalia.conf",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "198df510099f141417aea4036ed10c5c4b7a95c4611ad75fd8851883ab3a9c94"
     },
     {
       "path": "home/files/config/niri/colors.kdl",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "fc132b69006688aa371191b76ce6d3bcfa9e0757a9af835fec50b9a33f15841a"
     },
     {
       "path": "home/files/config/niri/config.kdl",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "444de54b1dd7bde23201c11ebe466a5a68dedc73c3baff18d6353ce8617daf5c"
     },
     {
       "path": "home/files/config/nvim/init.lua",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "3b2d6e9976a515b7c8df08ed7c7f61a5751e9c08a6ff5579d621b87312c9e2c6"
     },
     {
       "path": "home/files/config/nvim/lua/config/autocmds.lua",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "ccb2b3a99fe03698bdacaf41b98a48126c70fa38eaa1970e14e7309c876a9635"
     },
     {
       "path": "home/files/config/nvim/lua/config/keymaps.lua",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "660a7d9a603a1b20b9ac13384ee21093f648646d8f4d575c52c5e5d9847f6764"
     },
     {
       "path": "home/files/config/nvim/lua/config/lazy.lua",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "14653a615b10689aa91915f45c284d07d5e7cb6c5f21fdbbf82c7664b9db4eb0"
     },
     {
       "path": "home/files/config/nvim/lua/config/options.lua",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "30d51b75969f1f8c16964e4495c6477234bc031a713ffd24ffdf6e5a33cd1ef9"
     },
     {
       "path": "home/files/config/nvim/lua/plugins/example.lua",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "63cab8b37a319da640b073b6d654b11952776eac8cb55d8a6ac00e5f171366ba"
     },
     {
       "path": "home/files/config/nvim/stylua.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "59841fbcee7b707144c6a470e96e96e96062d7a59d2e45bac445984d863e1af2"
     },
     {
       "path": "home/files/config/portable-seeds/99-comic-mono.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "7c63d324824dfcda8594d639ceadb14215c96abad0ef61626493f71f633e3967"
     },
     {
       "path": "home/files/config/portable-seeds/99-media-paths.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e6b4d8d91d5cb23f4d1b37b8d36ce61dd36bc237781c9b71cb09e32256337e42"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/gtk-3.0/colors.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "fd7a71b7b2837b00c27183c118ac5c68bcf7799d8a676f1cf3586e8fe4e96efc"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/gtk-3.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "19f29c8bf61e65d0ef1340946cf517d53779aebe719f26183dbb8a8455e1dd63"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/gtk-4.0/colors.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "fd7a71b7b2837b00c27183c118ac5c68bcf7799d8a676f1cf3586e8fe4e96efc"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/gtk-4.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "8be840d95a1d9640813fd64dcddead340578dc59403512a6c96940d28ad2cba6"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/manifest.json",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "9d542e45ca6f4c71f990400a695f690cffa58ef91b5584c6358ac523388b1f45"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/kde/gtk-3.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "dc6a01d6319ddcb2b0274305debaa6c882bdc8adce0ca8fe1a6be45d78a51ec3"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/kde/gtk-3.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "0f708a21a6f3b4c238d3ccfef4494bcc2688a66068907f81258a17bf1ff8f686"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/kde/gtk-4.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "dc6a01d6319ddcb2b0274305debaa6c882bdc8adce0ca8fe1a6be45d78a51ec3"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/kde/gtk-4.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "cb1630b4663ac253aa9473da9821aa35747619333e97215710d1315d1228c69b"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/kde/kitty/theme.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "f978b6c86bc6b5d4a4a7ee39ec8d87d80c55a57eea2e2ae68cbaf8519afb9f24"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/mango/gtk-3.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "9e3a33d985cafbf146957dd7439381e46a5d28c5d257e65e66cc693a160e155c"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/mango/gtk-3.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "4026cd775818fd217835bfef28c95dbe46494f3ae71daae038b1a4617e06b305"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/mango/gtk-4.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "2cff31d8578f0f1286cd08e030dc64fd805c364d51259b58d9689a9fb0362ea1"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/mango/gtk-4.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "0bcaafb45f13999b9a4be2d84cbe475a5eecb4a3f450e7a4ee0cad84be9eba0b"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/mango/kitty/theme.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "b2a91c195f5317a55ceb8c9fda79387d81b39e323b228a35c183e1256e29b0c0"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/mango/qt5ct/colors/noctalia.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "db3fc9e74baa4d47c53dd023a769d031b25f0924886d6d1cc0aa6f9f31b1e189"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/mango/qt6ct/colors/noctalia.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "db3fc9e74baa4d47c53dd023a769d031b25f0924886d6d1cc0aa6f9f31b1e189"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/niri/gtk-3.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "44d0c43846733eab350c998cd00122366a04d59a82396fe4e7b4375dea9d0955"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/niri/gtk-3.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "4026cd775818fd217835bfef28c95dbe46494f3ae71daae038b1a4617e06b305"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/niri/gtk-4.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "7bc58ba48da75d6669dc8035818325992462729d22019776fd6f8f68281e68fe"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/niri/gtk-4.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "0bcaafb45f13999b9a4be2d84cbe475a5eecb4a3f450e7a4ee0cad84be9eba0b"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/niri/kitty/theme.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "e70449ca6e4d05b495cd2b926a389597309c0c99e55ee80a3f7ca51a985be365"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/niri/qt5ct/colors/noctalia.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "6a43e96add6462d1b8ad4fe17bbc0471511f62b5a35c22c9e3e3a1079343672d"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/niri/qt6ct/colors/noctalia.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "6a43e96add6462d1b8ad4fe17bbc0471511f62b5a35c22c9e3e3a1079343672d"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/sway/gtk-3.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "44d0c43846733eab350c998cd00122366a04d59a82396fe4e7b4375dea9d0955"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/sway/gtk-3.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "4026cd775818fd217835bfef28c95dbe46494f3ae71daae038b1a4617e06b305"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/sway/gtk-4.0/noctalia.css",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "7bc58ba48da75d6669dc8035818325992462729d22019776fd6f8f68281e68fe"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/sway/gtk-4.0/settings.ini",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "0bcaafb45f13999b9a4be2d84cbe475a5eecb4a3f450e7a4ee0cad84be9eba0b"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/sway/kitty/theme.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "e70449ca6e4d05b495cd2b926a389597309c0c99e55ee80a3f7ca51a985be365"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/sway/qt5ct/colors/noctalia.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "d814146b7214ed2dbc011c259b4a961d01323e8514c60ceb54052cad0d83484d"
+    },
+    {
+      "path": "home/files/config/portable-seeds/appearance/theme-profiles/sway/qt6ct/colors/noctalia.conf",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "d814146b7214ed2dbc011c259b4a961d01323e8514c60ceb54052cad0d83484d"
     },
     {
       "path": "home/files/config/portable-seeds/community-templates/obs/matugen.obt",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "8167aa8b97b17742f3494596bed51ee28a5b0acbeca0a5e249a1e64580f78735"
     },
     {
       "path": "home/files/config/portable-seeds/community-templates/obsidian/obsidian.css",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "97d0443652f563be91dc1896bbadc63cc311aa07f53b696a485df48e11213eb3"
     },
     {
       "path": "home/files/config/portable-seeds/community-templates/prismlauncher/prismlauncher.json",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "d9da34482bc805036e3f392d339758271bddbbf58b4782a4eb64fe29d2dc949f"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "d7a3c143e97f4a65b2684fb5727097204ecab6de9eabce7cce32946e12f7383f"
     },
     {
       "path": "home/files/config/portable-seeds/config.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "29c04da34ef48f56102cdc55da4810c2fbd26b9add08de0d2787860b6df2a2e8"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/hyprland/config.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "ae20f3b06ea4be5bc41894a6c539d97fcd1bf71d385eef5819c04b607decc10d"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/hyprland/profile-templates.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "a62aa6d8fbb4c1aeb87d7e59c0d68074918ed51e92d2b26e1e2292cb1ba4c8fb"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/mango/config.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1f1fd1b6a330ff91859ef0736da2a7049efd6d61d327518fa3e303b9da28254e"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/mango/profile-templates.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "185fe54be183960755461a882c40f39df374046bfa017d80e11d9be468baa862"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/niri/config.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1f1fd1b6a330ff91859ef0736da2a7049efd6d61d327518fa3e303b9da28254e"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/niri/profile-templates.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1b37d39dfec51acb16c63215eddbcbd0c87dd6263d70061d37e1c30564e3290c"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/sway/config.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1f1fd1b6a330ff91859ef0736da2a7049efd6d61d327518fa3e303b9da28254e"
     },
     {
       "path": "home/files/config/portable-seeds/profiles/sway/profile-templates.toml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6af391c234b0bcc3ce2cf235212508a32342706c0b3ca0235eb2b4c4e047f961"
     },
     {
       "path": "home/files/config/sway/colors",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d254434b8a5a698ed9ef016a0f707587ecd6362b4e580be37f54bc984c42000f"
     },
     {
       "path": "home/files/config/sway/config",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "0e50113adc4bf3009612ed0a53b02ec2974e8c84f94648f95fe716cb9a297d63"
     },
     {
       "path": "home/files/config/sway/noctalia",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "2cc7f3441d5da548226f5f0768502a03879e2a34d4977e24263c1e70bae9771d"
     },
     {
       "path": "home/files/scripts.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "179d83acd7de8cec8dab60391863b6eec157246ac41f2601751edab396783aaa"
     },
     {
       "path": "home/packages/ai.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1bea42103cca500daa7216d8683d60e82f9a8d4c0681d0bbd300d6e6ab06d487"
     },
     {
       "path": "home/packages/browsers.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e3458c0f1ba2ca67c1c5cc815f572952df5c00d317829c818e8fc2b9500e4208"
     },
     {
       "path": "home/packages/communication.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "5e4813b085e5187d541a3af447a539359aa6dc988fbab0fa32c7beabf91adc7a"
     },
     {
       "path": "home/packages/development.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "52a2817cc5af318ce031b657f00ec8b479f4b9d3b3907abd4cee48fdd32b2fe5"
     },
     {
       "path": "home/packages/gaming.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "2e4a6679710f10206cc64010bb818751283e26aabb698f6f2e6e8e6f216618a2"
     },
     {
       "path": "home/packages/media.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "c050efcb8347f653f939ce8750eb818f6629ad6c65254e170868b1dfcb51b78b"
     },
     {
       "path": "home/packages/productivity.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e537246008f264241f2246b07a23a3fbb5ca6195465036f8fcedcb38583f9aa9"
     },
     {
       "path": "home/packages/utilities.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "53e41c505bed53551e582fa41ecdd3c2691b1645a35bb6bece2178353c4995ed"
     },
     {
       "path": "home/programs/fastfetch.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "8f20b610c4495fed05cbe913b5784410ca1ac0f1151bada16d98af8d5f3e4dc2"
     },
     {
       "path": "home/programs/git.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "724b797c637f73b809678feb7f17b4935289d606677496cb681b731136664890"
     },
     {
       "path": "home/programs/kitty.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "ec05d47adbcb8b24e6a2cc270e46a30eea369ca111a10741a11325d03db4a794"
     },
     {
       "path": "home/programs/neovim.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "5eb63550328d828c19e18bd4ab5e43fc707e3122597126273d609def7780e27e"
     },
     {
       "path": "home/programs/shell.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "b12d025c435cbb2158de874a2e71a3fc0f212e4af68aea3b8c2c486cb210f93c"
     },
     {
       "path": "home/services/agents.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "b2b413cc4a52a4a215b2e89a09727f33adaff1c95f654e5bd9a181adb645c30a"
     },
     {
       "path": "home/services/portable-helpers.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e3ab64cfab317a6e365365e47c611629a497245283c1fec414fe345699c571b3"
     },
     {
       "path": "hosts/README.md",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "26f28952164d1ab2e6a359ed9b87ad5299fbdfcf7ffa08a4c95539d91455d3c4"
     },
     {
       "path": "hosts/template/default.nix",
       "classification": "HOST-SPECIFIC",
-      "reason": "Generic hardware boundary selected by generated CPU/GPU/boot metadata; no old disk identifiers.",
-      "sha256": "9e57457a67545612c3229bffe923be41797377c9c0735d93d87e5e4960fd9fdd"
+      "reason": "Generated-host CPU/GPU and safe generic integration boundary.",
+      "sha256": "ca78e50ea4d9ae40b5e1a601df7ff41914436d5820502bfc942714ef4f4b7f73"
     },
     {
       "path": "hosts/tonelico/default.nix",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "19a259b1390493caedd4502936c25089ae3141c254657fd3672684bd25f09ebe"
     },
     {
       "path": "hosts/tonelico/hardware-configuration.nix",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "9b14317f48b524616b132429bd63ec06639a8a18e44ab0de3c72eacfa80a2ee2"
     },
     {
       "path": "hosts/tonelico/host.nix",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "2727d228ba2a96b3aa7e18374e24e16b853f9d2b9d8339887c6e84a2d0f1a6a5"
     },
     {
       "path": "hosts/tonelico/input-devices.nix",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "df32ce6292a169d2d48635d89d9fb43811f58cda52a75529c5c62c96fbc497d9"
     },
     {
       "path": "hosts/tonelico/keyboard.nix",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "203be0ae39da398cd3eae0d9860a94584e2d2973ad7ff4f872aab9698410907c"
     },
     {
       "path": "installer/install.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "18ac7941bbe239fb9479c110b67547398b11a2e8983b789369665507fd3bb94c"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "367106d0aae0e70d126a0a7b7ec19aafa4d41f2199edbb9b7129c261dd8bb646"
     },
     {
       "path": "lib/desktop-config.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "8dc2b505062c75c5410af9894cc0413ed200b8c6943a5f74e49795836623d764"
     },
     {
       "path": "modules/nixos/core/audio.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6876793a4c32f6bf80ad9bd40b4614497c6b387cda0995bcda5dc91a1b4c4f85"
     },
     {
       "path": "modules/nixos/core/base.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "04451e60ea24ee71d4957e9bddce91e66838820b7baa41bf8196fc4eb3013339"
     },
     {
       "path": "modules/nixos/core/boot.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "3ac6f0e8edb12030f6d530a8fcb617b53dd9ac5ac4fbbbd712f194f2a8e828a1"
     },
     {
       "path": "modules/nixos/core/hardware.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "07d18386cf44900e3cfed73cb0ab7f801da5c87328dde947657a9e1d2cb36264"
     },
     {
       "path": "modules/nixos/core/networking.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "75b31c7d186afd649ece21a67bc9705f9a027e9848c0f4e8e5565b92e5036589"
     },
     {
       "path": "modules/nixos/core/packages.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "fbd208b6a78e8adc26375b6d543a95043d003a8a3badeaa66791e16a79448ac1"
     },
     {
       "path": "modules/nixos/core/recovery.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d8914a4cdb0ccd521b2683edd32dbb7426f0557391535407f6bfbe68c94c2914"
     },
     {
       "path": "modules/nixos/core/services.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "8fd9e7d59adac6015c35849b96a7d41f986b6b9967f0ea2754a4efadc3ab5d9a"
     },
     {
       "path": "modules/nixos/default.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d73132e49a751a310666f311df1f7e04d485b1ffdcda62001abd7100a5c8a875"
     },
     {
       "path": "modules/nixos/desktop/default.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "38ae2e9a2e76e05acd70afb2bdbb423c1c7c213d6762aa5331619a514f13cd09"
     },
     {
       "path": "modules/nixos/desktop/sessions/gnome-window-rules/extension.js",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "7b7243e95409478014b52c347431bf9eb22310f7cb144f61e43509e28fba09ed"
     },
     {
       "path": "modules/nixos/desktop/sessions/gnome-window-rules/geometry.js",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d00c85656d3540d44b98be0b3ee69b45cf9bdadf42100c667d100f30b12e9317"
     },
     {
       "path": "modules/nixos/desktop/sessions/gnome-window-rules/metadata.json",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e6eb7d2fddede28154fb0c17ef8d39d982621f563c6fb49b8e8987faa29495d3"
     },
     {
       "path": "modules/nixos/desktop/sessions/gnome-window-rules/schemas/org.gnome.shell.extensions.tonelico-window-rules.gschema.xml",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e69816b6a8457b00241b3a42beb0decbf8fe7a7ef8c3adeba4b1b97973367a17"
     },
     {
       "path": "modules/nixos/desktop/sessions/gnome.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "b1ee833324ea5c4d9fa5721f2c1f1dcdc656f0035f2d66c8509cce23c4504f11"
     },
     {
       "path": "modules/nixos/desktop/sessions/hyprland.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "f197d851e442a38c26f5b26adb5d980459729b3e1fdb6d61ea4a868604f13896"
     },
     {
       "path": "modules/nixos/desktop/sessions/hyprland/hyprland.lua",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "3655d65a53221665b3a84ca8f6d419dad39aeb3990cf5fbdfba7da759351b3b1"
     },
     {
       "path": "modules/nixos/desktop/sessions/mango.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d9294030260b27a141025fd4bf74ac13dca8ae2f7090bf60a21a71aefdfc5bbc"
     },
     {
       "path": "modules/nixos/desktop/sessions/niri.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "8db529869bf50d1c1798ef3eca89216332871c3758a751e12aba9f602ec50a85"
     },
     {
       "path": "modules/nixos/desktop/sessions/plasma.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "1f590392f980de80afd1a2ab0957e6605b13e42b48a13700271cc18899d82feb"
     },
     {
       "path": "modules/nixos/desktop/sessions/sway.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "79251a8eb02d3e8d84213acd549371515c5b335f3dfd2953379120c477dbe020"
     },
     {
       "path": "modules/nixos/desktop/sessions/xfce.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "965c585e611b0cd1135e291f5b36bc11cc28ec8dee320397058427f95cfd18a8"
     },
     {
       "path": "modules/nixos/desktop/sessions/xfwm4-fix.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "7a728ef047664d4d657aa09cda50b5a3378b0a2694f0a5b4e1d4c2f1c4414e31"
     },
     {
       "path": "modules/nixos/desktop/shared/autosleep.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "a57ef3090b06d027668dc4645778501cf3f86dd9798baf985a38ff31ff8ac573"
     },
     {
       "path": "modules/nixos/desktop/shared/autosleep.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "5172794d4e7d4447517585abae98de38bb9fd23f3c7b4099583fe38d69e28f55"
     },
     {
       "path": "modules/nixos/desktop/shared/environment.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "3dc5d5abbec4bd4e06c48ffba5ad3c3096fc7f37f415f885e4ca0e03faa77258"
     },
     {
       "path": "modules/nixos/desktop/shared/monitor-layout.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "a35faa55558a2adabc13879da64c7fb850175fa048dfe6effd0c163d6ad3d870"
     },
     {
       "path": "modules/nixos/desktop/shared/noctalia.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "c3a66cdf19745a3127fa58af3ca630e08f09a075b47b25b3f53ab00fd283af8f"
     },
     {
       "path": "modules/nixos/desktop/shared/overview.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6b96b0b6a58623019fa95f4bfd59a2fcd8ba129f66173150c54a7b7a77f1b1d9"
     },
     {
       "path": "modules/nixos/desktop/shared/overview/gnome-overview-pointer.patch",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e4c4261505a9855b176dd3d2d3fe96a53a846f128a1d4375ebe9de468f29c3cc"
     },
     {
       "path": "modules/nixos/desktop/shared/portals.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "fe58cd2e8e12bd25b9a76519270ce8d6520c7f28d50421058d661fd762f169a4"
     },
     {
       "path": "modules/nixos/desktop/shared/preferences.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "9526e505c2effb69070391b199ccef96140c578647364a90d046415b6ea6424f"
     },
     {
       "path": "modules/nixos/desktop/shared/session-catalog.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "ba44ea5414248424d5172868e4c0a824de0a6cc1a6ddf088d2205e8a18716216"
     },
     {
       "path": "modules/nixos/desktop/shared/session-lifecycle.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e2ca355ddafed3e674938fd86b649d90f0a478dfe6d824df78eb584950674a7c"
     },
     {
       "path": "modules/nixos/desktop/shared/theme-profiles.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d300ed2becad429b9450ddaaf73be86c2ed46b0224732652050c5f7ad8001351"
     },
     {
       "path": "modules/nixos/features/fonts.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "466616f65695dd64dad3e5c6b84120e06f8c8755901cc61cee2fa90d3eaca447"
     },
     {
       "path": "modules/nixos/features/gaming.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e541106eeb3b00b69990834e363ce5c98a3b9f5e8d5956ad8a8c03ad270b8759"
     },
     {
       "path": "modules/nixos/features/input-methods.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "44ce15895d8209bfa3173c62c392462f4950ad87452060eaa6d5c8ffa6ffff51"
     },
     {
       "path": "modules/nixos/features/qmk-keyboard.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "203be0ae39da398cd3eae0d9860a94584e2d2973ad7ff4f872aab9698410907c"
     },
     {
       "path": "modules/nixos/features/virtualization.nix",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "880ee6d715388b83e159e03a22ee7132e45aeab60d70872aba47dd33a039c841"
     },
     {
       "path": "recovery/fallback-1-generation-129.conf",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "e346174a6c303be0e364a4fee6c8b724d6a3208e5e37114575d8a2d252313403"
     },
     {
       "path": "recovery/fallback-2-generation-135.conf",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "020b693baef64f252b6e4ac113d1b24a240c93a50e83cc71dfde0a92a952e5e4"
     },
     {
       "path": "recovery/gen128.conf",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "42445c2401ea23ba0a98e365042660a9b4d2efcae1bdc7ef6f7ceaf507088a55"
     },
     {
       "path": "recovery/gen129.conf",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "745c217a26a7f19cea757b1f63528529c9d904dc6042eed5207a49b7b6948d55"
     },
     {
       "path": "recovery/quarantine.py",
       "classification": "HOST-SPECIFIC",
-      "reason": "Original laptop identity, disk UUIDs, device policies or local recovery resources. Not selected by generated hosts.",
+      "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
       "sha256": "6ff68f4644a1f329706e1fee00a1f19bc52ed4683283c0ffc6c175d231a5eb0a"
     },
     {
       "path": "tests/test_installer.py",
       "classification": "SHARED",
-      "reason": "Versioned public input to the complete modular system, user environment or installation/validation workflow.",
-      "sha256": "2c5badbb6492c483d9ea092b40ff524306a18630d92a981fa0da31d69b32e44f"
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "d01ffc54e07b1e4c81ef9886c915a66a9ee61b45e40a976f00baafcf519bfc30"
     }
   ],
   "external_inputs": [
     {
-      "path": "private:Hermes .env/config.yaml and messaging/model credentials",
       "classification": "EXTERNAL DEPENDENCY",
-      "reason": "Private authentication/configuration remains private; gateway starts only when required files exist."
+      "input": "Pinned upstream flake inputs and binary/source downloads",
+      "handling": "Exact flake.lock preserved; network availability remains required."
     },
     {
-      "path": "private:AGY authentication and private skills/history",
       "classification": "EXTERNAL DEPENDENCY",
-      "reason": "CLI and bridge are declared, but an authenticated account/session cannot be published."
+      "input": "Private Hermes/Telegram/API/AGY credentials and personal application state",
+      "handling": "Not published or invented; authenticated services wait for required private inputs."
     },
     {
-      "path": "private:Minecraft instances, browser profiles, Obsidian vault and personal documents",
       "classification": "EXTERNAL DEPENDENCY",
-      "reason": "Programs and automation are declared; user content and login sessions are not reproducible configuration."
-    },
-    {
-      "path": "network:pinned flake inputs and signed binary caches",
-      "classification": "EXTERNAL DEPENDENCY",
-      "reason": "Exact dependency identities are fixed by unchanged flake.lock; network availability and upstream retention remain external."
-    },
-    {
-      "path": "hardware:firmware mode, GPU support and physical peripherals",
-      "classification": "HOST-SPECIFIC",
-      "reason": "Re-detected or chosen per machine; physical performance/hotplug/audio require later hardware acceptance."
+      "input": "Original Tonelico local recovery store closures",
+      "handling": "Retained for the laptop only; generated hosts exclude their references."
     }
   ]
 }
