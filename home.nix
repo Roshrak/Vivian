@@ -15,6 +15,7 @@
     ./home/packages/utilities.nix
     ./home/packages/ai.nix
     ./home/desktop/configuration.nix
+    ./home/desktop/portable-seeds.nix
     ./home/desktop/gnome.nix
     ./home/services/agents.nix
     ./home/files/scripts.nix

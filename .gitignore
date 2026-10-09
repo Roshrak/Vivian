@@ -9,3 +9,12 @@ backup-*/
 # nixos-generate-config writes this compatibility file at the root. The active
 # flake imports hosts/<attribute>/hardware-configuration.nix instead.
 /hardware-configuration.nix
+
+# Private/generated runtime state is never publication input.
+__pycache__/
+*.pyc
+.env
+.env.*
+*.key
+*.pem
+result*

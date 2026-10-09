@@ -1,5 +1,5 @@
 {
-  description = "Acer laptop NixOS 26.05 with Mango and Noctalia v5";
+  description = "Vivian: complete modular NixOS 26.05 and Home Manager, with guided portable installation";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -81,6 +81,19 @@
         );
     in
     {
+      apps.x86_64-linux.install =
+        let
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          launcher = pkgs.writeShellApplication {
+            name = "vivian-install";
+            runtimeInputs = with pkgs; [ python3 git nix parted util-linux e2fsprogs dosfstools systemd nixos-install-tools ];
+            text = ''
+              exec python3 ${./installer/install.py} --source ${inputs.self.outPath} \
+                --revision ${lib.escapeShellArg (inputs.self.rev or inputs.self.dirtyRev or "uncommitted")} "$@"
+            '';
+          };
+        in { type = "app"; program = "${launcher}/bin/vivian-install"; };
+
       # Keep the directory-based target for installation/backup tooling and
       # expose hostname aliases for native nixos-rebuild without --flake.
       nixosConfigurations =

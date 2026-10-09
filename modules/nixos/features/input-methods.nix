@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  host,
   lib,
   ...
 }:
@@ -23,7 +24,7 @@
   };
   services.fcitx5-lotus = {
     enable = true;
-    users = [ "aesc" ];
+    users = [ host.primaryUser ];
     package = inputs.lotus.packages.${pkgs.stdenv.hostPlatform.system}.fcitx5-lotus;
   };
 }

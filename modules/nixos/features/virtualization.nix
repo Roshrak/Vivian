@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, host, ... }:
 
 {
   virtualisation.libvirtd = {
@@ -15,7 +15,7 @@
   programs.virt-manager.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 
-  users.users.aesc.extraGroups = [
+  users.users.${host.primaryUser}.extraGroups = [
     "libvirtd"
   ];
 

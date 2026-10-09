@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, host, ... }:
 
 let
   clipboardIndicatorUuid = "clipboard-indicator@tudmotu.com";
@@ -101,8 +101,8 @@ in
     monospace-font-name='Comic Mono 11.5'
 
     [org.gnome.desktop.background]
-    picture-uri='file:///home/aesc/Pictures/Wallpapers/wallpaperflare.com_wallpaper.jpg'
-    picture-uri-dark='file:///home/aesc/Pictures/Wallpapers/wallpaperflare.com_wallpaper.jpg'
+    picture-uri='file://${config.users.users.${host.primaryUser}.home}/Pictures/Wallpapers/wallpaperflare.com_wallpaper.jpg'
+    picture-uri-dark='file://${config.users.users.${host.primaryUser}.home}/Pictures/Wallpapers/wallpaperflare.com_wallpaper.jpg'
 
     [org.gnome.desktop.wm.preferences]
     num-workspaces=9

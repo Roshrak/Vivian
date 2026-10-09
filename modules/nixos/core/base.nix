@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, lib, host, ... }:
 {
   nix.settings = {
     experimental-features = [
@@ -31,10 +31,10 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
 
-  users.users.aesc = {
+  users.users.${host.primaryUser} = {
     isNormalUser = true;
-    uid = 1000;
-    description = "Aesc";
+    uid = host.userUid or 1000;
+    description = if host.primaryUser == "aesc" then "Aesc" else host.primaryUser;
     extraGroups = lib.mkBefore [
       "wheel"
       "networkmanager"

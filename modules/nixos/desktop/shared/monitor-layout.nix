@@ -1,9 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, host, ... }:
 
 let
   mkKanshiConfig =
     desktop:
-    pkgs.writeText "tonelico-kanshi-${desktop}.conf" ''
+    pkgs.writeText "tonelico-kanshi-${desktop}.conf" (if host.portable or false then ''
+      # Leave modes and connector topology to the compositor on other hardware.
+      # A wildcard supports internal, external and virtual connectors equally.
+      profile {
+        output "*" enable
+        exec /run/current-system/sw/bin/desktop-main-pointer ${desktop}
+      }
+    '' else ''
       # Keep the internal laptop panel to the right and place the external panel
       # to its left.  The dual-output profile must precede the internal-only one.
       profile {
@@ -16,7 +23,7 @@ let
         output eDP-1 enable position 0,0
         exec /run/current-system/sw/bin/desktop-main-pointer ${desktop}
       }
-    '';
+    '');
 in
 {
   # Kanshi uses the Wayland output-management protocol and reacts only to

@@ -2,9 +2,11 @@
   config,
   lib,
   pkgs,
+  host,
   ...
 }:
 let
+  desktop = import ../../lib/desktop-config.nix { inherit lib host; home = config.home.homeDirectory; };
   portable =
     path: lib.replaceStrings [ "/home/aesc" ] [ config.home.homeDirectory ] (builtins.readFile path);
 in
@@ -16,11 +18,11 @@ in
     lib.replaceStrings
       [ ''include "colors.kdl"'' ]
       [ ''include "${config.xdg.configHome}/niri/colors.kdl"'' ]
-      (portable ../files/config/niri/config.kdl);
-  xdg.configFile."sway/config".text = portable ../files/config/sway/config;
+      desktop.niri;
+  xdg.configFile."sway/config".text = desktop.sway;
   xdg.configFile."sway/noctalia".text = portable ../files/config/sway/noctalia;
   xdg.configFile."hypr/hyprland.lua".text =
-    portable ../../modules/nixos/desktop/sessions/hyprland/hyprland.lua;
+    desktop.hyprland;
 
   # Mango's animation helper, Noctalia, Fcitx, GTK, Plasma and XFCE write their
   # own runtime settings. Seed portable defaults only on a new machine; never
@@ -36,9 +38,16 @@ in
     }
     seed ${pkgs.writeText "mango-config.conf" (portable ../files/config/mango/config.conf)} "$HOME/.config/mango/config.conf"
     seed ${pkgs.writeText "mango-noctalia.conf" (portable ../files/config/mango/noctalia.conf)} "$HOME/.config/mango/noctalia.conf"
-    seed ${pkgs.writeText "mango-monitor-layout.conf" (portable ../files/config/mango/monitor-layout.conf)} "$HOME/.config/mango/monitor-layout.conf"
+    seed ${pkgs.writeText "mango-monitor-layout.conf" desktop.mangoMonitor} "$HOME/.config/mango/monitor-layout.conf"
     seed ${../files/config/niri/colors.kdl} "$HOME/.config/niri/colors.kdl"
     seed ${../files/config/sway/colors} "$HOME/.config/sway/colors"
     seed ${../files/config/kitty/default-theme.conf} "$HOME/.config/kitty/themes/default.conf"
+    ${lib.optionalString (host.portable or false) ''
+      run ${pkgs.coreutils}/bin/mkdir -p -- "$HOME/Pictures/Wallpapers"
+      for wallpaper in ${../../assets/wallpapers}/*; do
+        seed "$wallpaper" "$HOME/Pictures/Wallpapers/$(basename "$wallpaper")"
+      done
+      run ${pkgs.coreutils}/bin/mkdir -p -- "$HOME/.local/share" "$HOME/.hermes"
+    ''}
   '';
 }

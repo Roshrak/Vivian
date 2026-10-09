@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, host, lib, ... }:
 {
   imports = [
     inputs.noctalia.nixosModules.default
@@ -19,7 +19,7 @@
         path = "${pkgs.bibata-cursors}/share/icons";
       };
 
-      output = {
+      output = lib.mkIf (!(host.portable or false)) {
         # Keep the login UI on the laptop panel. Noctalia disables other KMS
         # connectors only for the greeter and restores them for the user session.
         name = "eDP-1";

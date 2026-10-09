@@ -1,5 +1,6 @@
 {
   config,
+  host,
   lib,
   pkgs,
   ...
@@ -75,6 +76,11 @@ let
     SLEEP=${pkgs.coreutils}/bin/sleep
     mode="''${1:-}"
 
+    ${lib.optionalString (host.portable or false) ''
+      # Startup focus is chosen natively from available outputs on portable hosts.
+      # Avoid warping to a foreign connector or repeatedly overriding user focus.
+      exit 0
+    ''}
     case "$mode" in
       sway|hyprland)
         attempt=0

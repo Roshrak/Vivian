@@ -4,6 +4,7 @@
   config,
   lib,
   pkgs,
+  host,
   ...
 }:
 
@@ -515,8 +516,8 @@ let
 
       # Keep both panels on the laptop when a monitor is hot-plugged. The
       # external display remains available for windows to the left of eDP-1.
-      set_property xfce4-panel /panels/panel-1/output-name string eDP-1
-      set_property xfce4-panel /panels/panel-2/output-name string eDP-1
+      set_property xfce4-panel /panels/panel-1/output-name string ${if host.portable or false then "Automatic" else "eDP-1"}
+      set_property xfce4-panel /panels/panel-2/output-name string ${if host.portable or false then "Automatic" else "eDP-1"}
 
       # Match the compositor sessions' region-first screenshot convention.
       set_command 'Print' 'xfce4-screenshooter --region'
@@ -663,7 +664,17 @@ let
       pkgs.xrandr
       pkgs.xev
     ];
-    text = ''
+    text = (if host.portable or false then ''
+      apply_layout_and_pointer() {
+        # Prefer an internal panel if present, otherwise the first connected output.
+        primary="$(xrandr --query | sed -nE 's/^(eDP[^ ]*|LVDS[^ ]*) connected.*/\1/p' | head -n1)"
+        if [ -z "$primary" ]; then
+          primary="$(xrandr --query | sed -nE 's/^([^ ]+) connected.*/\1/p' | head -n1)"
+        fi
+        [ -n "$primary" ] || return 0
+        xrandr --output "$primary" --auto --primary || true
+      }
+    '' else ''
       apply_layout_and_pointer() {
         if ! xrandr --query | grep -q '^eDP-1 connected'; then
           return 0
@@ -692,6 +703,7 @@ let
         fi
       }
 
+    '') + ''
       # Let XFCE's display daemon settle, then apply the desired left/right
       # layout. Reapply and recenter after RandR hotplug notifications.
       sleep 2

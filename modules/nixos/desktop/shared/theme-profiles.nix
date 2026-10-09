@@ -1,5 +1,6 @@
 {
   config,
+  host,
   lib,
   pkgs,
   ...
@@ -271,15 +272,15 @@ let
 
         # 1. Kitty configuration
         cat > "$HOME/.config/kitty/profiles/$PROFILE/kitty.conf" << 'KEOF'
-    include /home/aesc/.config/kitty/common.conf
+    include ${config.users.users.${host.primaryUser}.home}/.config/kitty/common.conf
     include theme.conf
     KEOF
 
         # Ensure canonical ~/.config/kitty/kitty.conf is a stable fallback
         if [ ! -f "$HOME/.config/kitty/kitty.conf" ] || grep -q "THEME_PROFILE" "$HOME/.config/kitty/kitty.conf"; then
           cat > "$HOME/.config/kitty/kitty.conf" << 'KEOF'
-    include /home/aesc/.config/kitty/common.conf
-    include /home/aesc/.config/kitty/themes/default.conf
+    include ${config.users.users.${host.primaryUser}.home}/.config/kitty/common.conf
+    include ${config.users.users.${host.primaryUser}.home}/.config/kitty/themes/default.conf
     KEOF
         fi
 
@@ -361,7 +362,7 @@ let
           if [ ! -f "$HOME/.config/qt6ct/qt6ct.conf" ] || [ ! -s "$HOME/.config/qt6ct/qt6ct.conf" ]; then
             cat > "$HOME/.config/qt6ct/qt6ct.conf" << 'QTEOF'
     [Appearance]
-    color_scheme_path=/home/aesc/.config/qt6ct/colors/noctalia.conf
+    color_scheme_path=${config.users.users.${host.primaryUser}.home}/.config/qt6ct/colors/noctalia.conf
     custom_palette=true
     style=Fusion
     QTEOF
