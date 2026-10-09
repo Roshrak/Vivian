@@ -58,7 +58,7 @@
 
 :root {
     --accent-color: #b8bb26;
-    --accent-bg-color: #b8bb26; 
+    --accent-bg-color: #b8bb26;
     --accent-fg-color: #282828;
 
     --destructive-bg-color: #fb4934;
@@ -102,6 +102,6 @@
     --success-color: #fabd2f;
     --success-bg-color: #745202;
     --success-fg-color: #feefcd;
-    
+
     --shade-color: rgba(0, 0, 0, 0.36);
 }

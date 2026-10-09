@@ -26,5 +26,7 @@
   "theme-profiles/kde/gtk-4.0/noctalia.css",
   "theme-profiles/kde/kitty/theme.conf",
   "gtk-3.0/colors.css",
-  "gtk-4.0/colors.css"
+  "gtk-4.0/colors.css",
+  "gtk-3.0/settings.ini",
+  "gtk-4.0/settings.ini"
 ]
