@@ -633,16 +633,6 @@ let
       XDG_SESSION_TYPE XDG_SESSION_CLASS XDG_SESSION_ID KITTY_CONFIG_DIRECTORY \
       THEME_PROFILE NOCTALIA_STATE_HOME NOCTALIA_CONFIG_HOME QT_QPA_PLATFORMTHEME
     /run/current-system/sw/bin/systemctl --user restart xdg-desktop-portal-wlr.service xdg-desktop-portal.service
-    # Noctalia starts alongside this compositor-ready hook. Retry a bounded
-    # time and leave an explicit failure if the saved policy remains unapplied.
-    for attempt in {1..20}; do
-      if /run/current-system/sw/bin/autosleep apply; then
-        exit 0
-      fi
-      ${pkgs.coreutils}/bin/sleep 0.25
-    done
-    echo "sway-session-ready: saved autosleep policy remains unapplied" >&2
-    exit 1
   '';
 
   swaySessionGuarded = pkgs.writeShellScriptBin "sway-session-guarded" ''

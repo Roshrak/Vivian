@@ -74,8 +74,7 @@ Minecraft instances or authenticated services before their real task can run.
 Fresh-host first-login repairs preserve intended behavior: mutable GTK profile
 settings, initial colors and available terminal/Qt palettes are included, rather
 than depending on unpublished files. The original laptop's source behavior is
-unchanged. The small autosleep policy retries briefly if Noctalia is still
-starting; it does not restart the compositor. Root rebuilds trust only
+unchanged. Root rebuilds trust only
 `/etc/nixos` through the generated system Git configuration. Installer Nix caches
 use a private directory on the target disk, with trust scoped to `/mnt/etc/nixos`.
 

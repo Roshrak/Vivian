@@ -14,7 +14,6 @@
     ./shared/overview.nix
     ./shared/portals.nix
     ./shared/session-lifecycle.nix
-    ./shared/autosleep.nix
     ./shared/session-catalog.nix
     ./shared/theme-profiles.nix
     ./shared/environment.nix

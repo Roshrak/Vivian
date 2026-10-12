@@ -1094,18 +1094,6 @@
       "sha256": "7a728ef047664d4d657aa09cda50b5a3378b0a2694f0a5b4e1d4c2f1c4414e31"
     },
     {
-      "path": "modules/nixos/desktop/shared/autosleep.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "a57ef3090b06d027668dc4645778501cf3f86dd9798baf985a38ff31ff8ac573"
-    },
-    {
-      "path": "modules/nixos/desktop/shared/autosleep.py",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "5172794d4e7d4447517585abae98de38bb9fd23f3c7b4099583fe38d69e28f55"
-    },
-    {
       "path": "modules/nixos/desktop/shared/environment.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
