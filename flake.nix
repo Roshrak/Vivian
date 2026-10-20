@@ -1,8 +1,15 @@
 {
   description = "Vivian: complete modular NixOS 26.05 and Home Manager, with guided portable installation";
 
+  # Dendritic layout: every .nix file under modules/ is a flake-parts module,
+  # imported automatically by import-tree. Hosts live under hosts/<name>/.
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,92 +35,8 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, ... }:
-    let
-      lib = nixpkgs.lib;
-      hostRoot = ./hosts;
-      hostEntries = builtins.readDir hostRoot;
-
-      # A host becomes a flake configuration when its directory contains both
-      # host.nix (small metadata) and hardware-configuration.nix (generated on
-      # that physical machine). Templates and documentation are ignored.
-      hostKeys = builtins.attrNames (
-        lib.filterAttrs (
-          name: type:
-          type == "directory"
-          && builtins.pathExists (hostRoot + "/${name}/host.nix")
-          && builtins.pathExists (hostRoot + "/${name}/hardware-configuration.nix")
-        ) hostEntries
-      );
-
-      mkHost =
-        hostKey:
-        let
-          hostPath = hostRoot + "/${hostKey}";
-          host = import (hostPath + "/host.nix");
-          codexPackage = inputs.codex-nixpkgs.legacyPackages.${host.system}.codex;
-          hostModule = hostPath + "/default.nix";
-          extraModules = host.extraModules or [ ];
-        in
-        lib.nameValuePair hostKey (
-          lib.nixosSystem {
-            system = host.system;
-            specialArgs = { inherit inputs host; };
-            modules = [
-              (hostPath + "/hardware-configuration.nix")
-              hostModule
-              inputs.home-manager.nixosModules.home-manager
-              ./home-manager.nix
-              ({ ... }: {
-                # Codex is intentionally sourced from the dedicated pinned
-                # input above instead of upgrading all NixOS packages.
-                nixpkgs.overlays = [
-                  (_final: _prev: { codex = codexPackage; })
-                ];
-              })
-              ./configuration.nix
-              ({ ... }: {
-                networking.hostName = host.hostName;
-              })
-            ]
-            ++ extraModules;
-          }
-        );
-    in
-    {
-      apps.x86_64-linux.install =
-        let
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
-          launcher = pkgs.writeShellApplication {
-            name = "vivian-install";
-            runtimeInputs = with pkgs; [ python3 git nix parted util-linux e2fsprogs dosfstools systemd nixos-install-tools ];
-            text = ''
-              exec python3 ${./installer/install.py} --source ${inputs.self.outPath} \
-                --revision ${lib.escapeShellArg (inputs.self.rev or inputs.self.dirtyRev or "uncommitted")} "$@"
-            '';
-          };
-        in { type = "app"; program = "${launcher}/bin/vivian-install"; };
-
-      # Keep the directory-based target for installation/backup tooling and
-      # expose hostname aliases for native nixos-rebuild without --flake.
-      nixosConfigurations =
-        let
-          configurations = builtins.listToAttrs (map mkHost hostKeys);
-          hostnames = map (key: (import (hostRoot + "/${key}/host.nix")).hostName) hostKeys;
-          hostnameAliases = builtins.listToAttrs (
-            map (
-              key: lib.nameValuePair (import (hostRoot + "/${key}/host.nix")).hostName configurations.${key}
-            ) hostKeys
-          );
-        in
-        assert lib.assertMsg (builtins.length (lib.unique hostnames) == builtins.length hostnames)
-          "Vivian hostnames must be unique across hosts/.";
-        assert lib.assertMsg (lib.all (key:
-          let name = (import (hostRoot + "/${key}/host.nix")).hostName;
-          in name == key || !(builtins.elem name hostKeys)) hostKeys)
-          "A Vivian hostname alias must not shadow another host directory.";
-        configurations // hostnameAliases;
-    };
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
     extra-substituters = [

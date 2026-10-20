@@ -1,6 +1,5 @@
 { config, lib, pkgs, host, ... }:
 {
-  imports = [ ../../modules/nixos/features/virtualization.nix ../../modules/nixos/features/qmk-keyboard.nix ];
   boot.kernelModules = [ "uinput" ];
   services.udev.extraRules = ''KERNEL=="uinput", SUBSYSTEM=="misc", GROUP="input", MODE="0660", TAG+="uaccess"'';
   # The selected wheel user maintains this one checkout. Native root rebuilds

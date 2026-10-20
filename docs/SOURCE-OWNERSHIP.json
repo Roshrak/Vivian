@@ -11,7 +11,7 @@
       "path": "README.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "51a02f6f88c1b135d4aa85f59e6527cf53770d8c6219e5d3f3a55c882d2d9ab6"
+      "sha256": "a4a5a71ac01deecb09f6a71b6df6fbeb384361ca29d2e91c2a9a6881e8e4686d"
     },
     {
       "path": "archive/claude-code.nix",
@@ -236,16 +236,10 @@
       "sha256": "43018ef6998b26663eabd5b09550f3b3328f783d1357e92a89b6cda6e7e4682b"
     },
     {
-      "path": "configuration.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "fe145d2890c1790273debbcd089c068b603caa35f4308948df391081c820c928"
-    },
-    {
       "path": "docs/PORTABILITY.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "a6b831894eb396fe5215ee4b280f3437ab93ca86a78bda7a3d14f4903ce1e87f"
+      "sha256": "07bf89b93bbd559b6863cb5b8d68712afb94746d6e6f14278ac734b0645e7756"
     },
     {
       "path": "docs/SOURCE-OWNERSHIP.json",
@@ -263,13 +257,13 @@
       "path": "flake.lock",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "546e4e99659d85301a0b5088b1b3d3d6c4bcb878b8b661868fabe5a09b4371e1"
+      "sha256": "9ae10938e6d7249c25a0f9ab2ff5a08357480a891026bb3f5d505f3cf3a10142"
     },
     {
       "path": "flake.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "00baa53445903a6418472cc51aaa8c3b4413a8aa25eb17fbf46dc2fec1e01745"
+      "sha256": "0360867c8b40ac2e34fdc04755e3d00ba8b1dc4d569a6eddcaf99b4c5c2f157e"
     },
     {
       "path": "fonts/comic-mono/ComicMono-Bold.ttf",
@@ -288,36 +282,6 @@
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "9b14317f48b524616b132429bd63ec06639a8a18e44ab0de3c72eacfa80a2ee2"
-    },
-    {
-      "path": "home-manager.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "a9310fc5274e173d2eb18ac3f32bd7de8db141faaac19e67d953cbdfe4ad662a"
-    },
-    {
-      "path": "home.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "6936f002eaa5ce53589daa58ff16de7132e9b5d50b4dec6854fddc52ba9cd3cb"
-    },
-    {
-      "path": "home/desktop/configuration.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "00cf1ad0b4743ea1ed85bd94510f21b838ba3c05bdb8a1b70fafcb7de402c5e7"
-    },
-    {
-      "path": "home/desktop/gnome.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "dbf50b22cb4ec542fcd563054358665507ebfe5d573fafdb380ca05b1e68fb10"
-    },
-    {
-      "path": "home/desktop/portable-seeds.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "2511aa4b400300af89071ca0608f4bf0f3cc0fea03b1472f7c837d3b4c033306"
     },
     {
       "path": "home/files/bin/agy_bridge.py",
@@ -806,118 +770,22 @@
       "sha256": "2cc7f3441d5da548226f5f0768502a03879e2a34d4977e24263c1e70bae9771d"
     },
     {
-      "path": "home/files/scripts.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "179d83acd7de8cec8dab60391863b6eec157246ac41f2601751edab396783aaa"
-    },
-    {
-      "path": "home/packages/ai.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "1bea42103cca500daa7216d8683d60e82f9a8d4c0681d0bbd300d6e6ab06d487"
-    },
-    {
-      "path": "home/packages/browsers.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "e3458c0f1ba2ca67c1c5cc815f572952df5c00d317829c818e8fc2b9500e4208"
-    },
-    {
-      "path": "home/packages/communication.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "5e4813b085e5187d541a3af447a539359aa6dc988fbab0fa32c7beabf91adc7a"
-    },
-    {
-      "path": "home/packages/development.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "52a2817cc5af318ce031b657f00ec8b479f4b9d3b3907abd4cee48fdd32b2fe5"
-    },
-    {
-      "path": "home/packages/gaming.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "2e4a6679710f10206cc64010bb818751283e26aabb698f6f2e6e8e6f216618a2"
-    },
-    {
-      "path": "home/packages/media.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "c050efcb8347f653f939ce8750eb818f6629ad6c65254e170868b1dfcb51b78b"
-    },
-    {
-      "path": "home/packages/productivity.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "e537246008f264241f2246b07a23a3fbb5ca6195465036f8fcedcb38583f9aa9"
-    },
-    {
-      "path": "home/packages/utilities.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "53e41c505bed53551e582fa41ecdd3c2691b1645a35bb6bece2178353c4995ed"
-    },
-    {
-      "path": "home/programs/fastfetch.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "8f20b610c4495fed05cbe913b5784410ca1ac0f1151bada16d98af8d5f3e4dc2"
-    },
-    {
-      "path": "home/programs/git.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "724b797c637f73b809678feb7f17b4935289d606677496cb681b731136664890"
-    },
-    {
-      "path": "home/programs/kitty.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "ec05d47adbcb8b24e6a2cc270e46a30eea369ca111a10741a11325d03db4a794"
-    },
-    {
-      "path": "home/programs/neovim.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "5eb63550328d828c19e18bd4ab5e43fc707e3122597126273d609def7780e27e"
-    },
-    {
-      "path": "home/programs/shell.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "b12d025c435cbb2158de874a2e71a3fc0f212e4af68aea3b8c2c486cb210f93c"
-    },
-    {
-      "path": "home/services/agents.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "b2b413cc4a52a4a215b2e89a09727f33adaff1c95f654e5bd9a181adb645c30a"
-    },
-    {
-      "path": "home/services/portable-helpers.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "e3ab64cfab317a6e365365e47c611629a497245283c1fec414fe345699c571b3"
-    },
-    {
       "path": "hosts/README.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "26f28952164d1ab2e6a359ed9b87ad5299fbdfcf7ffa08a4c95539d91455d3c4"
+      "sha256": "48abe31aba32bc498052d1a2ce5ab49efd83ad38dd0e234149880d6bc921efb1"
     },
     {
       "path": "hosts/template/default.nix",
       "classification": "HOST-SPECIFIC",
       "reason": "Generated-host CPU/GPU and safe generic integration boundary.",
-      "sha256": "ca78e50ea4d9ae40b5e1a601df7ff41914436d5820502bfc942714ef4f4b7f73"
+      "sha256": "43c02e5bb65ff931080c07bc0d4d9c35121c5a2c3eae5ed498ac746f1bee35cf"
     },
     {
       "path": "hosts/tonelico/default.nix",
       "classification": "HOST-SPECIFIC",
       "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
-      "sha256": "19a259b1390493caedd4502936c25089ae3141c254657fd3672684bd25f09ebe"
+      "sha256": "04dca5a3f671c87298e9a01adb87099bd44f514e90ad58fef73deb08543efb22"
     },
     {
       "path": "hosts/tonelico/hardware-configuration.nix",
@@ -929,7 +797,7 @@
       "path": "hosts/tonelico/host.nix",
       "classification": "HOST-SPECIFIC",
       "reason": "Original laptop hardware/recovery inputs, excluded from a generated foreign host.",
-      "sha256": "2727d228ba2a96b3aa7e18374e24e16b853f9d2b9d8339887c6e84a2d0f1a6a5"
+      "sha256": "aa1f470888382ec79a23059a753634075afd758ae35654831258206c748975d5"
     },
     {
       "path": "hosts/tonelico/input-devices.nix",
@@ -947,241 +815,403 @@
       "path": "installer/install.py",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "73537a71206bd609207fae29c34f881067713da832f3e7fcb47eb042afdbe75d"
+      "sha256": "3865d9cddc110cce64aae9766072407fc21eaf651e16d5262d67eb257041165f"
     },
     {
       "path": "lib/desktop-config.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "8dc2b505062c75c5410af9894cc0413ed200b8c6943a5f74e49795836623d764"
+      "sha256": "8c90d09d564f580e6087a4b311b6c3dc05982d5cd0945326b5867fecd34ad5fe"
     },
     {
-      "path": "modules/nixos/core/audio.nix",
+      "path": "modules/README.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "6876793a4c32f6bf80ad9bd40b4614497c6b387cda0995bcda5dc91a1b4c4f85"
+      "sha256": "569a2e98cc94e121333ef69b04222ef48c52edb09e42f9552eb920c3643a1577"
     },
     {
-      "path": "modules/nixos/core/base.nix",
+      "path": "modules/aggregates/desktop.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "04451e60ea24ee71d4957e9bddce91e66838820b7baa41bf8196fc4eb3013339"
+      "sha256": "287f4c3997bea21e8fcace9384ece0d55f17b1e543da1d8a271638c1288bdcda"
     },
     {
-      "path": "modules/nixos/core/boot.nix",
+      "path": "modules/aggregates/home.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "3ac6f0e8edb12030f6d530a8fcb617b53dd9ac5ac4fbbbd712f194f2a8e828a1"
+      "sha256": "ae77c7fed475402b5f4b7f4355135e942311cdebe392a7a711be67583ee99bc8"
     },
     {
-      "path": "modules/nixos/core/hardware.nix",
+      "path": "modules/aggregates/system.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "07d18386cf44900e3cfed73cb0ab7f801da5c87328dde947657a9e1d2cb36264"
+      "sha256": "df1c802001d04a12ea8b6334b6391b8dd9dfdfeccb18798f4fbaed438da11720"
     },
     {
-      "path": "modules/nixos/core/networking.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "75b31c7d186afd649ece21a67bc9705f9a027e9848c0f4e8e5565b92e5036589"
-    },
-    {
-      "path": "modules/nixos/core/packages.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "fbd208b6a78e8adc26375b6d543a95043d003a8a3badeaa66791e16a79448ac1"
-    },
-    {
-      "path": "modules/nixos/core/recovery.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "d8914a4cdb0ccd521b2683edd32dbb7426f0557391535407f6bfbe68c94c2914"
-    },
-    {
-      "path": "modules/nixos/core/services.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "8fd9e7d59adac6015c35849b96a7d41f986b6b9967f0ea2754a4efadc3ab5d9a"
-    },
-    {
-      "path": "modules/nixos/default.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "d73132e49a751a310666f311df1f7e04d485b1ffdcda62001abd7100a5c8a875"
-    },
-    {
-      "path": "modules/nixos/desktop/default.nix",
-      "classification": "SHARED",
-      "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "38ae2e9a2e76e05acd70afb2bdbb423c1c7c213d6762aa5331619a514f13cd09"
-    },
-    {
-      "path": "modules/nixos/desktop/sessions/gnome-window-rules/extension.js",
+      "path": "modules/desktop/sessions/gnome-window-rules/extension.js",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "7b7243e95409478014b52c347431bf9eb22310f7cb144f61e43509e28fba09ed"
     },
     {
-      "path": "modules/nixos/desktop/sessions/gnome-window-rules/geometry.js",
+      "path": "modules/desktop/sessions/gnome-window-rules/geometry.js",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "d00c85656d3540d44b98be0b3ee69b45cf9bdadf42100c667d100f30b12e9317"
     },
     {
-      "path": "modules/nixos/desktop/sessions/gnome-window-rules/metadata.json",
+      "path": "modules/desktop/sessions/gnome-window-rules/metadata.json",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e6eb7d2fddede28154fb0c17ef8d39d982621f563c6fb49b8e8987faa29495d3"
     },
     {
-      "path": "modules/nixos/desktop/sessions/gnome-window-rules/schemas/org.gnome.shell.extensions.tonelico-window-rules.gschema.xml",
+      "path": "modules/desktop/sessions/gnome-window-rules/schemas/org.gnome.shell.extensions.tonelico-window-rules.gschema.xml",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e69816b6a8457b00241b3a42beb0decbf8fe7a7ef8c3adeba4b1b97973367a17"
     },
     {
-      "path": "modules/nixos/desktop/sessions/gnome.nix",
+      "path": "modules/desktop/sessions/gnome.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "b1ee833324ea5c4d9fa5721f2c1f1dcdc656f0035f2d66c8509cce23c4504f11"
+      "sha256": "cd6b236bf8b27bcc0f6e6a1225770b84063043f2f54eb25c0cd33ff730649c8f"
     },
     {
-      "path": "modules/nixos/desktop/sessions/hyprland.nix",
+      "path": "modules/desktop/sessions/hyprland.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "f197d851e442a38c26f5b26adb5d980459729b3e1fdb6d61ea4a868604f13896"
+      "sha256": "a30b59e73a811a3c74d616af543ff9917a128264b01af6774243ba05270609b2"
     },
     {
-      "path": "modules/nixos/desktop/sessions/hyprland/hyprland.lua",
+      "path": "modules/desktop/sessions/hyprland/hyprland.lua",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "3655d65a53221665b3a84ca8f6d419dad39aeb3990cf5fbdfba7da759351b3b1"
     },
     {
-      "path": "modules/nixos/desktop/sessions/mango.nix",
+      "path": "modules/desktop/sessions/mango.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "d9294030260b27a141025fd4bf74ac13dca8ae2f7090bf60a21a71aefdfc5bbc"
+      "sha256": "4b3694bcd506ef6cb8ab86c1810a7737c183c4887b7082acd47d456437b11ac7"
     },
     {
-      "path": "modules/nixos/desktop/sessions/niri.nix",
+      "path": "modules/desktop/sessions/niri.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "8db529869bf50d1c1798ef3eca89216332871c3758a751e12aba9f602ec50a85"
+      "sha256": "52996eddcc99a06a1b435fc14248485d77159318e3639a2ea7fbfe63f252c22b"
     },
     {
-      "path": "modules/nixos/desktop/sessions/plasma.nix",
+      "path": "modules/desktop/sessions/plasma.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "1f590392f980de80afd1a2ab0957e6605b13e42b48a13700271cc18899d82feb"
+      "sha256": "bba88974f48fa981fa392766d25d588e21cecfa1be03f812578652370a014f35"
     },
     {
-      "path": "modules/nixos/desktop/sessions/sway.nix",
+      "path": "modules/desktop/sessions/sway.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "79251a8eb02d3e8d84213acd549371515c5b335f3dfd2953379120c477dbe020"
+      "sha256": "f7422ae86e21962f6177babf1d5cb2fe27a32d70ce92c40a57c2fe8f58a5c591"
     },
     {
-      "path": "modules/nixos/desktop/sessions/xfce.nix",
+      "path": "modules/desktop/sessions/xfce.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "965c585e611b0cd1135e291f5b36bc11cc28ec8dee320397058427f95cfd18a8"
+      "sha256": "656281a35e16362a2403e42011c7278a6d647b937650fc18928ac301a969a2e9"
     },
     {
-      "path": "modules/nixos/desktop/sessions/xfwm4-fix.nix",
+      "path": "modules/desktop/sessions/xfwm4-fix.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "7a728ef047664d4d657aa09cda50b5a3378b0a2694f0a5b4e1d4c2f1c4414e31"
+      "sha256": "825e21659dc529e2d8174556a118d81d99b748cbb228dbb30e255708e964c9ef"
     },
     {
-      "path": "modules/nixos/desktop/shared/environment.nix",
+      "path": "modules/desktop/shared/environment.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "3dc5d5abbec4bd4e06c48ffba5ad3c3096fc7f37f415f885e4ca0e03faa77258"
+      "sha256": "631a83a80b4d0ebdfddb6a39d443f7d9c64f1b468d7d41d94d3e55e7eb841991"
     },
     {
-      "path": "modules/nixos/desktop/shared/monitor-layout.nix",
+      "path": "modules/desktop/shared/monitor-layout.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "a35faa55558a2adabc13879da64c7fb850175fa048dfe6effd0c163d6ad3d870"
+      "sha256": "f37c9e7243665a796cbec3176a9b40b2441f115f8587b743dcc4fbb7ac1ea02e"
     },
     {
-      "path": "modules/nixos/desktop/shared/noctalia.nix",
+      "path": "modules/desktop/shared/noctalia.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "c3a66cdf19745a3127fa58af3ca630e08f09a075b47b25b3f53ab00fd283af8f"
+      "sha256": "81bb30ccc7e217c1085a1a2bfd88cb40a3adc9a74739832e118ea60f459f32be"
     },
     {
-      "path": "modules/nixos/desktop/shared/overview.nix",
+      "path": "modules/desktop/shared/overview.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "6b96b0b6a58623019fa95f4bfd59a2fcd8ba129f66173150c54a7b7a77f1b1d9"
+      "sha256": "9df6fe47570fa3ae7d64ec92793337482acf968d5b6aef8562314fc8e1713cc7"
     },
     {
-      "path": "modules/nixos/desktop/shared/overview/gnome-overview-pointer.patch",
+      "path": "modules/desktop/shared/overview/gnome-overview-pointer.patch",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "e4c4261505a9855b176dd3d2d3fe96a53a846f128a1d4375ebe9de468f29c3cc"
     },
     {
-      "path": "modules/nixos/desktop/shared/portals.nix",
+      "path": "modules/desktop/shared/portals.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "fe58cd2e8e12bd25b9a76519270ce8d6520c7f28d50421058d661fd762f169a4"
+      "sha256": "bcaaa9fc2410cd31347999934d5d84a6e7b0ee602b71b1bb2f6e00992091e698"
     },
     {
-      "path": "modules/nixos/desktop/shared/preferences.nix",
+      "path": "modules/desktop/shared/preferences.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "9526e505c2effb69070391b199ccef96140c578647364a90d046415b6ea6424f"
+      "sha256": "36c5b86ea62e5b632c99ac45f3a9cf2b92af2291c211b35ffbe6c5b171f73386"
     },
     {
-      "path": "modules/nixos/desktop/shared/session-catalog.nix",
+      "path": "modules/desktop/shared/session-catalog.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "ba44ea5414248424d5172868e4c0a824de0a6cc1a6ddf088d2205e8a18716216"
+      "sha256": "547e69756bb2067a6f311b015b9badb8f3e005c348faee7e349288945042cfbf"
     },
     {
-      "path": "modules/nixos/desktop/shared/session-lifecycle.nix",
+      "path": "modules/desktop/shared/session-lifecycle.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "e2ca355ddafed3e674938fd86b649d90f0a478dfe6d824df78eb584950674a7c"
+      "sha256": "2c6ea43b97db4df6dc46d0be61baf91f1c0e16859ac2f50587e19374731ed33c"
     },
     {
-      "path": "modules/nixos/desktop/shared/theme-profiles.nix",
+      "path": "modules/desktop/shared/theme-profiles.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "d300ed2becad429b9450ddaaf73be86c2ed46b0224732652050c5f7ad8001351"
+      "sha256": "880cd452f77fb054c21935b5804924906faf5bdc57a1b5b9e4275e32d5191a88"
     },
     {
-      "path": "modules/nixos/features/fonts.nix",
+      "path": "modules/features/fonts.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "466616f65695dd64dad3e5c6b84120e06f8c8755901cc61cee2fa90d3eaca447"
+      "sha256": "28b0a79e277471cfe402e475f05c0a4fa786a2c21ae874fc08e39507ba2eb897"
     },
     {
-      "path": "modules/nixos/features/gaming.nix",
+      "path": "modules/features/gaming.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "e541106eeb3b00b69990834e363ce5c98a3b9f5e8d5956ad8a8c03ad270b8759"
+      "sha256": "f3daa89f47935abf53f317245a2cb16fffcbdc72b6c95f2b246233b41ff04da0"
     },
     {
-      "path": "modules/nixos/features/input-methods.nix",
+      "path": "modules/features/input-methods.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "44ce15895d8209bfa3173c62c392462f4950ad87452060eaa6d5c8ffa6ffff51"
+      "sha256": "d8f17e320bc237864781198f981fb69a00514b6ddcd1db3e555502d08274eae7"
     },
     {
-      "path": "modules/nixos/features/qmk-keyboard.nix",
+      "path": "modules/features/qmk-keyboard.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "203be0ae39da398cd3eae0d9860a94584e2d2973ad7ff4f872aab9698410907c"
+      "sha256": "e200d20b003a03d75863cb47f301b13af46f9a4b8cc4c71ddc50cdd3104d8a1a"
     },
     {
-      "path": "modules/nixos/features/virtualization.nix",
+      "path": "modules/features/virtualization.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "880ee6d715388b83e159e03a22ee7132e45aeab60d70872aba47dd33a039c841"
+      "sha256": "69e5f323d667a0f0ac8f842c54c3004ee12f2dda6b3696e1b47fd0176ff05adf"
+    },
+    {
+      "path": "modules/flake/hosts.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "17688b96ca649a9d6fdc70e916a7dd135f9b8985191c414fe651db66358f4b71"
+    },
+    {
+      "path": "modules/flake/installer.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "102fb7bbe08171b4894018ae639fc53f79730bd5cad05c400028518067376658"
+    },
+    {
+      "path": "modules/flake/options.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "5bc4a9259696ea554debfbb08e832786aa90b85b5d5437272de4644476298f67"
+    },
+    {
+      "path": "modules/flake/systems.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "2efa0187cd19f8208b1fca8fa285aeb9b387a67c395ec055ec6307414a56d507"
+    },
+    {
+      "path": "modules/home/base.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "f13fcd03dec275ade5c082683cfc4dc7cebe224c7a61d45ad6692a67d300f93a"
+    },
+    {
+      "path": "modules/home/desktop/configuration.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "4754611d388106ae53f74e71c870983dbc14c4cd5f7ce913eedafffa2b4be15f"
+    },
+    {
+      "path": "modules/home/desktop/gnome.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "0e04bf0873874546544c109e0b37c5f2bcb381b132b89044b42477e6e482eca0"
+    },
+    {
+      "path": "modules/home/desktop/portable-seeds.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "2b36e18caf950cf854c54111a419e9d83a58bc824d6ed797f7f0f2c52000b8d1"
+    },
+    {
+      "path": "modules/home/packages/ai.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "41ce957f21a60ee708d666290cd77848046f09af4e3318fe0aedacd9b014ec05"
+    },
+    {
+      "path": "modules/home/packages/browsers.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "9a1d98a2474fca015c5ef0d8c4260b4ba54066af5ca10dde1588dcb17cf94ddf"
+    },
+    {
+      "path": "modules/home/packages/communication.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "b3427dd4a40a64d76593071f6b8bdec1d92f288ce94769c105a1dff647857d5c"
+    },
+    {
+      "path": "modules/home/packages/development.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "513dc853eea143c94493d901c731a0acc6635b6dd6b10ed21d39c8e29ce33847"
+    },
+    {
+      "path": "modules/home/packages/gaming.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "8fd779a3eeffae33b5d923c51048c2914d9c884623a0c1cf54060bf9d8294722"
+    },
+    {
+      "path": "modules/home/packages/media.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "1f469d094c0bfbcb808628aab6c1b609833d7c21e0d250b5b707b08bfebb1784"
+    },
+    {
+      "path": "modules/home/packages/productivity.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "d123cb7392d6dae60fe1d8b038241d303a5515a1b5b4d695ef25523cfc8eed3d"
+    },
+    {
+      "path": "modules/home/packages/utilities.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "d635d0412c605be51b38454fccf02adcb6de21a0cb52601b6b0fddd669fa6174"
+    },
+    {
+      "path": "modules/home/programs/fastfetch.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "6aadd34aebd8278578cc9e59c0bc57606206ab723d1f56f4e87899ff0429dc8d"
+    },
+    {
+      "path": "modules/home/programs/git.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "8f56dcfc070047c38a677d8ee34b66e1b264532e02a29cab374b459e95c5a19e"
+    },
+    {
+      "path": "modules/home/programs/kitty.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "a79da2245826eb04a97f514b2e392a5a7bfdf17786b29c0512beb551894d117d"
+    },
+    {
+      "path": "modules/home/programs/neovim.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "4bbecde26c122140abf6b67a37260ce8a9a0dc0d68bb4f5d1c2ca1f27ac9f85f"
+    },
+    {
+      "path": "modules/home/programs/shell.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "314de902584eeb768eb6e2f53a4599ad56358540159252b05392b556ef27c64e"
+    },
+    {
+      "path": "modules/home/scripts.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "fe8bf474c7282bcba635ae0787fa2a9417d9fd4a39db25c63e2228764b5ae4b0"
+    },
+    {
+      "path": "modules/home/services/agents.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "7b7efbd8f71b56af18b65feb086bca764a52d65edda089a3e610f50e5555f099"
+    },
+    {
+      "path": "modules/home/services/portable-helpers.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "4cbc0d21a7f3c18877ad63c03b41bc1c4cb8462ee588550f3775b93a7349e707"
+    },
+    {
+      "path": "modules/system/audio.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "e12628fb1b82043a35d44c5eb121b7caa334fa104d97ed3b52ff250febc1ef40"
+    },
+    {
+      "path": "modules/system/base.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "ea32fab6a11f5263768df861d05033fb1ed0bd8289fb4df2ba71fe30155fcdd2"
+    },
+    {
+      "path": "modules/system/boot.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "d3949a81cc440542df3310ec78b673ea405058700b4c8e49e7cc0eb7dec9d4c2"
+    },
+    {
+      "path": "modules/system/hardware.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "c3ada5d342ef22a8ca6c790e4fbcc09a70f4860f7bd314eba594a2c55c429ef7"
+    },
+    {
+      "path": "modules/system/home-manager-integration.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "fd2336fc52e7fa60a0addc9baecd460f5f0a35767dcff9c862da2baf0feb2bcf"
+    },
+    {
+      "path": "modules/system/networking.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "36b2dfaa60fd45b1b14110b0b4fd0e61d566ab444dffec8c3d3fb0bf532ab6c0"
+    },
+    {
+      "path": "modules/system/packages.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "80dacfb45139b98a2d841d0aa7c3747b902ff9021ef97975d1412b35bd79fe32"
+    },
+    {
+      "path": "modules/system/recovery.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "dfed0483248105377a34ed39e7bbb08a86b1ca48377fb380345d0c98b2244d38"
+    },
+    {
+      "path": "modules/system/services.nix",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "b55a61eb0c63bbccf63b2e03a7e882d7da6369def23e341e72c870aeff43955e"
     },
     {
       "path": "recovery/fallback-1-generation-129.conf",

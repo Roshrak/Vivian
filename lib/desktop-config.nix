@@ -33,7 +33,7 @@ in {
   ]) (lib.optionals isPortable [
     ''hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })''
     "" "cursor = {},"
-  ]) (portable ../modules/nixos/desktop/sessions/hyprland/hyprland.lua);
+  ]) (portable ../modules/desktop/sessions/hyprland/hyprland.lua);
   mangoMonitor = if isPortable then "# Automatic compositor layout; no foreign connector names.\n"
     else portable ../home/files/config/mango/monitor-layout.conf;
 }
