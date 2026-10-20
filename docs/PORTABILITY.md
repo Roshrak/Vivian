@@ -1,12 +1,13 @@
 # Portability boundaries
 
-Shared: all modules imported by configuration.nix and home.nix, unless an
-explicit host boundary below applies. All flake inputs remain pinned to the
-October 9 lock file. All seven sessions and their custom patches/wrappers remain.
+Shared: every module under modules/ (imported automatically), unless an
+explicit host boundary below applies. Existing flake inputs remain pinned to the
+October 9 lock file; flake-parts and import-tree were added for the module layout. All seven sessions and their custom patches/wrappers remain.
 
 Host-specific: hosts/tonelico's UUIDs, Intel NPU/driver tuning, PixArt touchpad
 reprobe, exact USB rules, eDP-1/HDMI-A-1 geometry and local recovery generations.
-The installer generates a separate host and imports hosts/template instead.
+The installer generates a separate host that imports hosts/template and selects
+the shared virtualization and QMK features by name in its host.nix.
 Foreign hosts use preferred modes and automatic output layout; laptop bindings,
 zoom animations and shared session/portal ownership remain unchanged.
 

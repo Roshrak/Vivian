@@ -61,8 +61,8 @@ than overwritten. Leave existing target files intact when diagnosing failures.
 
 ## After installation
 
-Your editable configuration is `/etc/nixos`; `home.nix` is the Home Manager
-entry point. The generated host is under `hosts/<your-hostname>/`. Hardware
+Your editable configuration is `/etc/nixos`; `modules/aggregates/home.nix` lists
+the Home Manager features for your user. The generated host is under `hosts/<your-hostname>/`. Hardware
 configuration is generated on the new machine and tracked in a local Git
 checkout, so native commands find its hostname alias automatically:
 
@@ -99,14 +99,16 @@ authenticated integrations remain outside that VM evidence.
 ## Configuration layout
 
 ```text
-flake.nix / flake.lock   pinned inputs, hosts and the install app
-configuration.nix       shared NixOS module entry point
-hosts/tonelico/           original laptop hardware and recovery policy
-hosts/template/          generic CPU/GPU and feature integration
-modules/nixos/           core, desktop sessions/shared features, other features
-home-manager.nix         integrated NixOS/Home Manager ownership boundary
-home.nix                 user configuration entry point
-home/                    programs, packages, desktops, services and scripts
+flake.nix / flake.lock   pinned inputs (flake-parts, import-tree) and the install app
+modules/                 every .nix file is a flake-parts module (import-tree)
+  flake/                 option storage, systems, host discovery
+  aggregates/            system, desktop and user sets of features
+  system/ desktop/ features/   named nixos.<feature> modules
+  home/                  named homeManager.<feature> modules and the shared base
+hosts/tonelico/          original laptop hardware and recovery policy
+hosts/template/          generic CPU/GPU host settings for installed machines
+home/files/              configuration files and helper scripts (not modules)
+lib/desktop-config.nix   shared desktop settings for NixOS and Home Manager
 assets/wallpapers/        public wallpaper collection
 installer/install.py     guarded, resumable installer
 tests/                   isolated safety and source-integrity checks

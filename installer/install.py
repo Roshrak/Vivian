@@ -440,6 +440,8 @@ def prepare_source(source, revision, boot_mode, boot_disk, vm_key=None, checkpoi
   cpuVendor = %s;
   gpuVendor = %s;
   extraModules = [ %s ];
+  # Shared features this installation always gets (formerly imported by hosts/template).
+  features = [ "virtualization" "qmk-keyboard" ];
 }
 ''' % tuple([json.dumps(v) for v in (hostname, username, boot_mode, boot_disk, cpu, gpu)] + [' '.join(extra)]))
         save_json(tree / 'installation-provenance.json', {
@@ -515,7 +517,7 @@ def main():
     require_installer()
     source = args.source.resolve()
     source_hash = digest(source)[0]
-    if not (source / 'flake.lock').is_file() or not (source / 'home.nix').is_file():
+    if not (source / 'flake.lock').is_file() or not (source / 'modules' / 'aggregates' / 'system.nix').is_file():
         raise ValueError('Incomplete immutable flake source.')
     print('\n=== VIVIAN: exact modular NixOS + Home Manager ===')
     print('Source revision: ' + args.revision)
