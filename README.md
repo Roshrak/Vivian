@@ -85,10 +85,6 @@ come from the shared modular configuration. CPU/GPU drivers, displays, boot
 mode, disk UUIDs, hostname and username are selected for the new host.
 Mutable Noctalia settings and wallpapers are seeded only if absent.
 
-Personal documents, Minecraft instances, browser sessions, private passwords,
-Telegram/API tokens and AGY authentication are **not public installation inputs**.
-The agent applications and bridge are installed; authenticated operation still
-requires the owner's credentials. The gateway waits for its private configuration.
 See [portability boundaries](docs/PORTABILITY.md) and [validation](docs/VALIDATION.md).
 
 The public command has been tested with actual UEFI and BIOS installations from
@@ -128,6 +124,8 @@ The complete collection is in [assets/wallpapers](assets/wallpapers).
 <a href="assets/wallpapers/__morgan_le_fay_and_aesc_fate_and_1_more_drawn_by_mento__f67538d98eaf6f373f3f6e0eb1ba8d49.jpg"><img src="assets/wallpapers/__morgan_le_fay_and_aesc_fate_and_1_more_drawn_by_mento__f67538d98eaf6f373f3f6e0eb1ba8d49.jpg" width="240" alt="__morgan_le_fay_and_aesc_fate_and_1_more_drawn_by_mento__f67538d98eaf6f373f3f6e0eb1ba8d49"></a>
 <a href="assets/wallpapers/__morgan_le_fay_fate_and_1_more_drawn_by_mochi_upamo__5a0064b23658cf009024bdb8bb13c707.jpg"><img src="assets/wallpapers/__morgan_le_fay_fate_and_1_more_drawn_by_mochi_upamo__5a0064b23658cf009024bdb8bb13c707.jpg" width="240" alt="__morgan_le_fay_fate_and_1_more_drawn_by_mochi_upamo__5a0064b23658cf009024bdb8bb13c707"></a>
 <a href="assets/wallpapers/__morgan_le_fay_fate_and_1_more_drawn_by_reluvy__617c9c2c2600b9f4c49693f239d75f10.png"><img src="assets/wallpapers/__morgan_le_fay_fate_and_1_more_drawn_by_reluvy__617c9c2c2600b9f4c49693f239d75f10.png" width="240" alt="__morgan_le_fay_fate_and_1_more_drawn_by_reluvy__617c9c2c2600b9f4c49693f239d75f10"></a>
+<a href="assets/wallpapers/better%20flare.jpeg"><img src="assets/wallpapers/better%20flare.jpeg" width="240" alt="better flare"></a>
+<a href="assets/wallpapers/wallpapersden.com_blue-sky-in-evening_4589x3059.jpg"><img src="assets/wallpapers/wallpapersden.com_blue-sky-in-evening_4589x3059.jpg" width="240" alt="wallpapersden blue sky in evening"></a>
 <a href="assets/wallpapers/ashes_ash_firewood_130924_1920x1200.jpg"><img src="assets/wallpapers/ashes_ash_firewood_130924_1920x1200.jpg" width="240" alt="ashes_ash_firewood_130924_1920x1200"></a>
 <a href="assets/wallpapers/flower_sunflower_artificial_119551_1920x1200.jpg"><img src="assets/wallpapers/flower_sunflower_artificial_119551_1920x1200.jpg" width="240" alt="flower_sunflower_artificial_119551_1920x1200"></a>
 <a href="assets/wallpapers/hatsune-miku-mclaren-gtr-and-the-fashionable-driver-27-1920x1200.jpg"><img src="assets/wallpapers/hatsune-miku-mclaren-gtr-and-the-fashionable-driver-27-1920x1200.jpg" width="240" alt="hatsune-miku-mclaren-gtr-and-the-fashionable-driver-27-1920x1200"></a>
