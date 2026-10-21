@@ -11,7 +11,7 @@
       "path": "README.md",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "a4a5a71ac01deecb09f6a71b6df6fbeb384361ca29d2e91c2a9a6881e8e4686d"
+      "sha256": "aa04e9a808b33929d71d9b63c059de3da727fd5552c9d3dc01e7de6ccac3fd13"
     },
     {
       "path": "archive/claude-code.nix",
@@ -96,6 +96,12 @@
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "33e462c88eef647e09a55ab7dc341463b7b4a311191c08c79764678f64c8c903"
+    },
+    {
+      "path": "assets/wallpapers/better flare.jpeg",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "14762a51e0f896a2ad688c8abec20d102aa06e99f3b6e210a9a238410839a763"
     },
     {
       "path": "assets/wallpapers/flower_sunflower_artificial_119551_1920x1200.jpg",
@@ -222,6 +228,12 @@
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
       "sha256": "6a4aafffd87e0940b8c4abb1ebf1dd840995267b80347bbd64d038c200128f17"
+    },
+    {
+      "path": "assets/wallpapers/wallpapersden.com_blue-sky-in-evening_4589x3059.jpg",
+      "classification": "SHARED",
+      "reason": "Public source/resource for the complete shared modular configuration or installer.",
+      "sha256": "861b40dfb52151bf7ffeb0d31a42570ced2b680d1eb186323538b382cbbf8e4f"
     },
     {
       "path": "assets/wallpapers/wp16058089-cartoon-miku-wallpapers.jpg",
