@@ -269,7 +269,7 @@
       "path": "flake.lock",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "9ae10938e6d7249c25a0f9ab2ff5a08357480a891026bb3f5d505f3cf3a10142"
+      "sha256": "f1e8edb6865f9988b34f4730bbbe139d30b7e1420e8f406d8dd91de36858c693"
     },
     {
       "path": "flake.nix",
@@ -425,19 +425,19 @@
       "path": "home/files/config/mango/config.conf",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "1956e77ab7f41419c0f0a72ff855bacea74421819000622c5b12daf4db23df68"
+      "sha256": "6a581114db02cae7c479b03eb1648331cf77a8dca32c66452416bc4c95703558"
     },
     {
       "path": "home/files/config/mango/monitor-layout.conf",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "64b79b00fe1e02dabe3ddb271c886f69b04d322dd4f2d518d94a808c7935ff05"
+      "sha256": "4dbeac8ff315bddcecc390ec9c2aef17d0532bb2b8dc6cf8cd80363a98bbd9c6"
     },
     {
       "path": "home/files/config/mango/noctalia.conf",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "198df510099f141417aea4036ed10c5c4b7a95c4611ad75fd8851883ab3a9c94"
+      "sha256": "483cbc514a852248aa14c93ceee7bcf3387248facb5b0b014e6403aba17d3d33"
     },
     {
       "path": "home/files/config/niri/colors.kdl",
@@ -1187,7 +1187,7 @@
       "path": "modules/system/boot.nix",
       "classification": "SHARED",
       "reason": "Public source/resource for the complete shared modular configuration or installer.",
-      "sha256": "d3949a81cc440542df3310ec78b673ea405058700b4c8e49e7cc0eb7dec9d4c2"
+      "sha256": "a7e709eab75127d232f8f0f3625a5d3e26d697649d3ef164a66cc5605187f4e0"
     },
     {
       "path": "modules/system/hardware.nix",

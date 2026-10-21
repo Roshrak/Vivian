@@ -13,6 +13,7 @@
         configurationLimit = 5;
       };
       boot.loader.efi.canTouchEfiVariables = (host.bootMode or "uefi") == "uefi";
+      boot.loader.timeout = 5;
       boot.loader.efi.efiSysMountPoint = host.efiMountPoint or "/boot";
       boot.loader.grub = lib.mkIf ((host.bootMode or "uefi") == "bios") {
         enable = true;
